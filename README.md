@@ -6,8 +6,8 @@ Game Name: Honeypot
 Team Name: SurvivingMonday
 
 Team Members:
-Eugene Goh (Captain)
-Girish Hari
-Pauline Low
-Sayyid Sofwan
-Tan Zheng Hao
+1. Eugene Goh (Captain)
+2. Girish Hari
+3. Pauline Low
+4. Sayyid Sofwan
+5. Zheng Hao Tan
