@@ -33,11 +33,13 @@
                 mapOptions);
 
           // More map coordinates.
+          var startPointAnnArbor = new google.maps.LatLng(42.2814, -83.7483);
           var Jakarta = new google.maps.LatLng(-6.2, 106.8);
           var London = new google.maps.LatLng(51.5072, -0.1275);
           var Paris = new google.maps.LatLng(48.8567, 2.3508);
 
           // Place them on the map.
+          placeMarker(startPointAnnArbor, map);
           placeMarker(Jakarta, map);
           placeMarker(London, map);
           placeMarker(Paris, map);
@@ -62,7 +64,7 @@
   </head>
 
   <body>
-    <div id="map-canvas" style="height: 100%; width: 100%"></div>
+    <div id="map-canvas" style="height: 80%; width: 80%"></div>
   </body>
 
 </html>
