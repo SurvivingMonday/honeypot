@@ -1,5 +1,9 @@
+html, body {
+		margin: 0px;
+		padding: 0px;
+		height: 100%;
+}
+
 body {
 		background-image:url("http://www.zingerbugimages.com/backgrounds/white_honeycomb_seamless_pattern.jpg");
-		background-repeat: repeat-x;
-		vertical-align: baseline;
-	}
+}
