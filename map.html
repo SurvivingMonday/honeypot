@@ -17,6 +17,7 @@
       src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true">
     </script>
 
+
     <script type="text/javascript">
       
       var map;
@@ -52,7 +53,11 @@
           // Create a new StyledMapType object, passing it the array of styles,
           // as well as the name to be displayed on the map type control.
           var styledMap = new google.maps.StyledMapType(styles,
-            {name: "Styled Map"});
+          {
+              name: "Styled Map",
+              minZoom: 10,
+              maxZoom: 15
+          });
 
           // More map coordinates.
           var startPointAnnArbor = new google.maps.LatLng(42.2814, -83.7483);
@@ -139,7 +144,6 @@
         google.maps.event.addListener(marker, 'mouseover', function() {
           infowindow.setContent(place.name);
           infowindow.open(map, this);
-          // animation: google.maps.Animation.BOUNCE;
         });
       }
 
