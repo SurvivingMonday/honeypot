@@ -1,5 +1,67 @@
 var app = {};
 
+// to test -> consule.log - button onclick call function
+// begin duplicate
+	// Variables here
+ /*   var player = {};
+    player.cash = 0;
+    player.inventory = [];
+	document.write(player.cash);
+	// 3 Types of Keylogger( Beginner, Medium, Hard)
+	// hitfactor and risk to be generate depending on type.
+	// Keylogger Begin
+	var Easy = {};
+	Easy.type="Easy";
+	Easy.price = 100; 
+	Easy.risk = 0.2; 
+	Easy.hitfactor = 0.4;
+	document.write(player.cash);
+	// Keylogger Medium
+	var Medium ={};
+	Medium.type="Medium";
+	Medium.price = 200;
+	Medium.risk = 0.4;
+	Medium.hitfactor = 0.6;
+	
+	// Keylogger Hard
+	var Hard ={};
+	Hard.type="Hard";
+	Hard.price = 400;
+	Hard.risk = 0.6;
+	Hard.hitfactor = 0.8;
+	document.write(player.cash);
+	//BlackM
+	
+	var blackm = {};
+	blackm.credentials=[];
+	blackm.creditcard=[];
+	blackm.unencrypteddata=[];
+	blackm.identity=[];
+	blackm.keylogger=[];
+	blackm.keylogger.push(Begin);
+	blackm.keylogger.push(Medium);
+	blackm.keylogger.push(Hard);
+	document.write(player.cash);
+		
+
+function getCash(){
+	alert(player.cash);
+	return player.cash;
+}
+
+function getInventory(){
+	for (var i=0;i<player.inventory.length;i++)
+	{	 
+		alert(player.inventory[i].type + " " + player.inventory[i].name);
+	}
+	if(player.inventory.length==0)
+    alert("Player has not bought anything");
+	return;
+}
+*/	
+// end duplicate
+
+
 app.prototype = function (){    
     
 	// Variables here
@@ -63,22 +125,35 @@ app.prototype = function (){
   return {
       // Public functions
     getCash: function () {    //display cash
-          return player.cash;
-      },
+      return player.cash;
+    },
+    getAttention: function () {    //display cash
+      return player.attentionLevel;
+    },
     getInventory: function() {   //getInventory displays on screen
-      for (var i=0;i<player.inventory.length;i++)
-      {	 
+      for (var i=0;i<player.inventory.length;i++){	 
         alert(player.inventory[i].type + " " +player.inventory[i].name);
       }
-      if(player.inventory.length==0)
+      if(player.inventory.length==0){
           alert("Player has not bought anything");
+      }
       return;
     },
+    getProduce: function() {   //getProduce displays on screen 
+      alert(player.produce.credentials);
+      alert(player.produce.uncrypteddata);
+      alert(creditcard);
+      alert(identity);
+      return;
+    }, 
     getBlackM: function() { //getBlackM displays on screen
-      return
-    },
-    getRisk: function() { //getRisk displays on screen
-      return
+      for (var i=0;i<blackm.onsale.length;i++){	 
+        alert(blackm.onsale[i].type+ " " +blackm.onsale[i].name);
+      }
+      if(blackm.onsale.length==0){
+          alert("Market Close");
+      }
+      return;
     },
     buy: function(a){   //buy from BlackM
       if (player.cash >= a.price){
