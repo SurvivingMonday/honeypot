@@ -42,8 +42,8 @@ app.service('GameManager', function($interval, GameMapService) {
       quality: 1,
       price: 100,
       risk: 0.2,
-      hitfactor: 0.4,
-      expiryTime: 0,
+      hitfactor: 0.75,
+      expiryTime: 6,
       installationCost: 10
     },
 
@@ -53,8 +53,8 @@ app.service('GameManager', function($interval, GameMapService) {
       quality: 2,
       price: 150,
       risk: 0.1,
-      hitfactor: 0.4,
-      expiryTime: 0,
+      hitfactor: 0.75,
+      expiryTime: 6,
       installationCost: 12
     },
 
@@ -64,8 +64,8 @@ app.service('GameManager', function($interval, GameMapService) {
       quality: 3,
       price: 200,
       risk: 0.4,
-      hitfactor: 0.8,
-      expiryTime: 15,
+      hitfactor: 1.2,
+      expiryTime: 18,
       installationCost: 16
     },
 
@@ -75,8 +75,8 @@ app.service('GameManager', function($interval, GameMapService) {
       quality: 4,
       price: 350,
       risk: 0.4,
-      hitfactor: 1,
-      expiryTime: 15,
+      hitfactor: 1.4,
+      expiryTime: 18,
       installationCost: 19
     },
 
@@ -86,7 +86,7 @@ app.service('GameManager', function($interval, GameMapService) {
       quality: 5,
       price: 400,
       risk: 0.6,
-      hitfactor: 1.6,
+      hitfactor: 2.2,
       expiryTime: 30,
       installationCost: 25
     }
@@ -200,38 +200,47 @@ app.service('GameManager', function($interval, GameMapService) {
       blackm.sellprice.dataC * player.dataC
     );
     player.ecData = 0;
+    player.ecDataTemp = 0;
     player.dataA = 0;
     player.dataB = 0;
     player.dataC = 0;
   };
 
   this.infect = function (a, b, c) {
-    a.countdown = 0;
+    a.countdown = Math.round(Math.random() + 1);
     a.duration = player.inventory[b].expiryTime + Math.floor((Math.random()*30)+1);
     a.timer = 0;
     a.gps = player.inventory[b].hitfactor;
-    a.index = b;
-    if(c === 0) {
+    console.log(c);
+    if(c > 0) {
       a.public = true;
+      player.points = c * 100;
     } else {
       a.public = false;
     }
 
     player.marker.push(a);
-    console.log(b);
     player.cash -= player.inventory[b].installationCost;
-    console.log(player.cash);
     player.attentionLevel += player.inventory[b].risk * 10;
     player.points += c * 100;
+  };
+
+  this.analysis = function () {
+    player.dataA += Math.round(0.6 * player.ecData);
+    player.dataB += Math.round(0.3 * player.ecData);
+    player.dataC += Math.round(0.1 * player.ecData);
+    player.ecData = 0;
+    player.ecDataTemp = 0;
   };
 
   this.update = function () {
     for (var i = 0; i < player.marker.length; i++){
       player.marker[i].duration -= 1;
-      if (player.marker[i].countdown === 0) {
+      if (player.marker[i].countdown >= 0) {
         player.marker[i].countdown -= 1;
         player.marker[i].timer = player.marker[i].duration;
       } else if (player.marker[i].countdown === -1) {
+        GameMapService.animateMarker(player.marker[i]);
         player.marker[i].timer -= 1;
         if(player.marker[i].public === true) {
           player.ecDataTemp += player.marker[i].gps;
@@ -245,7 +254,7 @@ app.service('GameManager', function($interval, GameMapService) {
       }
       if(player.marker[i].duration < 0){
         player.marker[i].setMap(null);
-        player.marker.splice(player.marker[i].index, 1);
+        player.marker.splice(i, 1);
       }
     }
   };

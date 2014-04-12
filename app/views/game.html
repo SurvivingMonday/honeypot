@@ -26,9 +26,13 @@
       <tab heading="Sell" id="sell">
       <h3>Selling anything today?</h3>
     	<p><font color="red">WARNING: You will lose all your inventory</font><p>
-		<button type="button" class="btn btn-larde btn-success" ng-click="notifySell($index)">Sell</button>
-
-    </tab>
+		  <button type="button" class="btn btn-larde btn-success" ng-click="notifySell($index)">Sell</button>
+      </tab>
+      <tab heading="Analyze" id="analyze">
+        <h3>I can help you encrypt data :D</h3>
+        <p>WARNING: You will lose your encrypted data</p>
+        <button type="button" class="btn btn-larde btn-success" ng-click="notifyAnalyze($index)">Analyze</button>
+      </tab>
     </tabset>
   </div>
 

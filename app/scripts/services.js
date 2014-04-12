@@ -102,20 +102,17 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 
 
 		var service = new PlacesApi.PlacesService(map);
-		console.log(service);
 
 		var request = {
-			location: startPointAnnArbor,
-			radius: '3000',
+			location: location,
+			radius: '100',
 			types:['store', 'school', 'cafe', 'food', 'night_club', 'post_office',
 			'restaurant', 'school', 'hospital', 'library', 'lodging']
 		};
 
-		console.log(request);
-		console.log(startPointAnnArbor);
-		console.log(service.nearbySearch);
 
 		service.nearbySearch(request, function(results) {
+      console.log(results);
 			callback(results.length, marker);
 		});
 	};

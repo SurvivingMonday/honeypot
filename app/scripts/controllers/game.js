@@ -19,6 +19,7 @@ app.controller('GameCtrl', function ($scope, $timeout, GameManager, GameMapServi
 
 	$scope.notifyBuy = GameManager.buy;
 	$scope.notifySell = GameManager.sell;
+  $scope.notifyAnalyze = GameManager.analysis;
 	
 	$scope.selectInv = function(idx) {
 		if (selectedIdx !== null) {
