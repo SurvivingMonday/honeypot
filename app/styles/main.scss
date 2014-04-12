@@ -195,6 +195,11 @@ background-color:black;
   
   }
   
+  #sellQuestion{
+  
+  color:black;
+  background-color:white;
+  }
 
   .inventory {
     width: 20%;
@@ -207,8 +212,14 @@ background-color:black;
   }
 
   #game-notify {
-    width: 75%;
     position: fixed;
-    left: 50%;
-    margin: 0 0 0 -37.5%;
+    right: 30px;
+    top: 60px;
+    div {
+      background-color: rgb(255, 255, 123);
+      text-align: center;
+      line-height: 30px;
+      border-radius: 5px;
+      padding: 5px;
+    }
   }
