@@ -4,13 +4,13 @@ app.service('GameManager', function($interval, GameMapService) {
 
   // Player
   var player = {
-    cash: 10000,
-    attentionLevel: 98, // 0 - 100
-    ecData: 10,
-    ecDataTemp: 10,
-    dataA: 10,
-    dataB: 10,
-    dataC: 10,
+    cash: 210,
+    attentionLevel: 99, // 0 - 100
+    ecData: 0,
+    ecDataTemp: 0,
+    dataA: 0,
+    dataB: 0,
+    dataC: 0,
     points: 0,
     gameover: false,
     inventory: [],
@@ -156,8 +156,17 @@ app.service('GameManager', function($interval, GameMapService) {
 
   // Public functions
   this.initGame = function () {
-    player.cash = 200;
-    player.inventory = {};
+    player.cash = 210;
+    player.attentionLevel = 0; // 0 - 100
+    player.ecData = 0;
+    player.ecDataTemp = 0;
+    player.dataA = 0;
+    player.dataB = 0;
+    player.dataC = 0;
+    player.points = 0;
+    player.gameover = false;
+    player.inventory = [];
+    player.marker = [];
   };
 
   this.newGame = function () {
@@ -176,6 +185,12 @@ app.service('GameManager', function($interval, GameMapService) {
 
   this.onAlert = function (callback) {
     AlertCallBack = callback;
+  };
+
+   var GameOverCallBack = angular.noop;
+
+  this.onGameOver = function (callback) {
+    GameOverCallBack = callback;
   };
 
   this.buy = function (a){   //buy from BlackM
@@ -234,39 +249,45 @@ app.service('GameManager', function($interval, GameMapService) {
     player.ecDataTemp = 0;
   };
 
+  var gameover = function () {
+    this.initGame();
+    GameOverCallBack();
+  };
+
   this.update = function () {
-    if (player.attentionLevel === 100) {
+    if (player.attentionLevel >= 100) {
       player.gameover = true;
-      this.gameover();
-    }
-    for (var i = 0; i < player.marker.length; i++){
-      player.marker[i].duration -= 1;
-      if (player.marker[i].countdown >= 0) {
-        player.marker[i].countdown -= 1;
-        player.marker[i].timer = player.marker[i].duration;
-      } else if (player.marker[i].countdown === -1) {
-        GameMapService.animateMarker(player.marker[i]);
-        player.marker[i].timer -= 1;
-        if(player.marker[i].public === true) {
-          player.ecDataTemp += player.marker[i].gps;
-          player.ecData = Math.floor(player.ecDataTemp);
+      this.initGame();
+      GameOverCallBack();
+    } else {
+      for (var i = 0; i < player.marker.length; i++){
+        player.marker[i].duration -= 1;
+        if (player.marker[i].countdown >= 0) {
+          player.marker[i].countdown -= 1;
+          player.marker[i].timer = player.marker[i].duration;
+        } else if (player.marker[i].countdown === -1) {
+          GameMapService.animateMarker(player.marker[i]);
+          player.marker[i].timer -= 1;
+          if(player.marker[i].public === true) {
+            player.ecDataTemp += player.marker[i].gps;
+            player.ecData = Math.floor(player.ecDataTemp);
+          }
+
         }
+        if(player.marker[i].duration === 5) {
 
-      }
-      if(player.marker[i].duration === 5) {
-
-        GameMapService.brokenKeyLogger(player.marker[i]);
-      }
-      if(player.marker[i].duration < 0){
-        player.marker[i].setMap(null);
-        player.marker.splice(i, 1);
+          GameMapService.brokenKeyLogger(player.marker[i]);
+        }
+        if(player.marker[i].duration < 0){
+          player.marker[i].setMap(null);
+          player.marker.splice(i, 1);
+        }
       }
     }
-  };
-
-  this.gameover = function () {
 
   };
+
+
 
   $interval(this.update, 1000);
 });
