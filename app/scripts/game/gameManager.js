@@ -126,7 +126,7 @@ app.service('GameManager', function() {
 
   this.updatetime = function () {
     return (gametime = setInterval(1000));
-  }.();
+  };
 
 
   // Public functions
