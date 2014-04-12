@@ -100,7 +100,7 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 
 		maps.event.addListener(marker, 'click', markerCallback);
 
-		var service = new PlacesApi(map);
+		var service = new PlacesApi.PlacesService(map);
 
 		var request = {
 			location: location,
