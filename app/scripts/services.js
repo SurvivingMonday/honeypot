@@ -89,7 +89,7 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 		  // The origin for this image is 0,0.
 		  origin: new google.maps.Point(0,0),
 		  // The anchor for this image is the base of the icon at 0,32.
-		  anchor: new google.maps.Point(12, 32)
+		  anchor: new google.maps.Point(15, 40)
 		};
 
 		var marker = new google.maps.Marker({
@@ -131,7 +131,7 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 			// The origin for this image is 0,0.
 			origin: new google.maps.Point(0,0),
 			// The anchor for this image is the base of the icon at 0,32.
-			anchor: new google.maps.Point(0, 32)
+			anchor: new google.maps.Point(15, 40)
 		};
 
 		marker.icon = newImage;
