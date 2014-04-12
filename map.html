@@ -80,10 +80,11 @@
 
           var request = {
             location: startPointAnnArbor,
-            radius: '9000',
+            radius: '500',
             types: ['school', 'cafe', 'restaurant', 'food', 'airport', 
                     'bank', 'atm', 'embassy']
           };
+          console.log(request);
 
           var service = new google.maps.places.PlacesService(map);
           service.nearbySearch(request, callBack);
