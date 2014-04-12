@@ -3,13 +3,13 @@ var app = {};
 // begin duplicate
 	// Variables here
   var player = {};
-  player.cash = 0;
+  player.cash = 1000;
   player.attentionLevel = 0;  // scale: 0-10
   player.inventory = [];  
   player.marker = [];
   player.produce = {};
   player.produce.credentials = 0;
-  player.produce.unencrypteddata = 0;
+  player.produce.crypteddata = 0;
   player.produce.creditcard = 0;
   player.produce.identity = 0;
   //document.write(player.cash);
@@ -66,7 +66,7 @@ var app = {};
   //document.write("Higher");
 
 function getCash(){    //display cash
-      alert(player.cash);
+      alert("Player Cash:" + " " + player.cash);
       return player.cash;
     }
 
@@ -85,13 +85,13 @@ function getInventory(){   //getInventory displays on screen
       return;
     }
 function getProduce(){   //getProduce displays on screen 
-      alert(player.produce.credentials);
-      alert(player.produce.uncrypteddata);
-      //alert(creditcard);
-      //alert(identity);
+      alert("Player credentials" + " " + player.produce.credentials);
+      alert("Player crypteddata" + " " + player.produce.crypteddata);
+      alert("Player creditcard" + " " + player.produce.creditcard);
+      alert("Player identity" + " " + player.produce.identity);
       return;
     }
-/*    
+    
 function getBlackM(){ //getBlackM displays on screen
       for (var i=0;i<blackm.onsale.length;i++){	 
         alert(blackm.onsale[i].type+ " " +blackm.onsale[i].name);
@@ -101,6 +101,26 @@ function getBlackM(){ //getBlackM displays on screen
       }
       return;
     }
+function keyloggerEasy(){
+      alert("Buying Easy keylogger");
+      alert(Easy.price);
+      buy(Easy);
+      return;
+    }
+function keyloggerMedium(){
+      alert("Buying Medium keylogger");
+      alert(Medium.price);
+      buy(Medium);
+      return;
+    }
+
+function keyloggerHard(){
+      alert("Buying Hard keylogger");
+      alert(Hard.price);
+      buy(Hard);
+      return;
+    }    
+    
 function buy(a){   //buy from BlackM
       if (player.cash >= a.price){
         player.cash -= a.price;
@@ -112,6 +132,7 @@ function buy(a){   //buy from BlackM
         return;
       }
     }
+/*
 function sell(){  // sell to BlackM
       return (
       blackm.sellprice.unencrypteddata * player.produce.unencrypteddata +
