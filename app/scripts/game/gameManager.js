@@ -1,6 +1,6 @@
 'use strict';
 
-app.service('GameManager', function($q, $cookieStore) {
+app.service('GameManager', function() {
 
   // Player
   var player = {
