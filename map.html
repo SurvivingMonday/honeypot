@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map-canvas { height: 100%; margin: 0px; padding: 0px }
+    </style>
+    
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMK4hHDANvDWvP2yn1JcJffZAEGX1-Xhk&sensor=true">
+    </script>
+
+    <script type="text/javascript" 
+      src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true">
+    </script>
+
+    <script type="text/javascript">
+      
+      var map;
+
+      function initialize() {
+          
+          // More map coordinates.
+          var startPointAnnArbor = new google.maps.LatLng(42.2814, -83.7483);
+
+          // Set the map options.
+          var mapOptions = {
+            zoom: 15,
+            center : startPointAnnArbor
+          };
+
+          // Make the map object.
+          map = new google.maps.Map(document.getElementById('map-canvas'),
+                mapOptions);
+
+          // Place them on the map.
+          placeMarker(startPointAnnArbor, map);
+
+          var request = {
+            location: startPointAnnArbor,
+            radius: '500',
+            types: ['store']
+          };
+
+          var service = new google.maps.places.PlacesService(map);
+          service.nearbySearch(request, callback);
+      }
+
+      function placeMarker(location, map) {
+        var marker = new google.maps.Marker({
+          position: location,
+          map: map
+        });
+        map.panTo(location);
+      }
+
+      function callback(results, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            var place = results[i];
+            createMarker(results[i]);
+          }
+        }
+      }
+
+      function createMarker(place) {
+        var placeLoc = place.geometry.location;
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
+        });
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+
+  <body>
+    <div id="map-canvas" style="height: 70%; width: 70%"></div>
+  </body>
+
+</html>
