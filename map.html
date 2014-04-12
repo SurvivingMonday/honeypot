@@ -41,7 +41,7 @@
 
           var request = {
             location: startPointAnnArbor,
-            radius: '500',
+            radius: '9000',
             types: ['store']
           };
 
@@ -66,6 +66,17 @@
         }
       }
 
+      var contentString = '<div id="content">'+
+          '<div id="siteNotice">'+
+          '</div>'+
+          '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+          '</div>'+
+          '</div>';
+
+      var infowindow = new google.maps.InfoWindow({
+            content: contentString
+      });
+
       function createMarker(place) {
         var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
@@ -73,7 +84,7 @@
           position: place.geometry.location
         });
 
-        google.maps.event.addListener(marker, 'click', function() {
+        google.maps.event.addListener(marker, 'mouseover', function() {
           infowindow.setContent(place.name);
           infowindow.open(map, this);
         });
