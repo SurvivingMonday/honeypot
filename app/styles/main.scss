@@ -120,16 +120,18 @@ body {
     }
 
   .navbar.main-nav {
-    background-color: #3832D4;
+  background-color: #3832D4;
     .navbar-brand {
       color: white;
+      background-color: #3832D4;
     }
     .navbar-text {
       color: white;
+      background-color: #3832D4;
     }
     .navbar-nav >li > a {
-      color: black;
-      background-color:white;
+      color: white;
+      background-color: #3832D4;
     }
   }
 
@@ -145,22 +147,56 @@ body {
     width: 20%;
     height: 50%;
     background-color: black;
+    color:white;
     float: right;
     overflow: auto;
   }
 
 #blackM{
 	color:white;
+	background-color:black;
 	
 
 }
 
 
+#buyTable{
+color:black;
+background-color:white;
+
+}
+
+#buyTable2{
+color:red;
+background-color:black;
+
+}
 
   #map-canvas {
     width: 80%;
     height: 100%;
     float: left;
+  }
+  
+  #inventoryHeader{
+  	color:white;
+  	background-color:black;
+  }
+  
+  #inventoryBigHeader{
+  
+  background-color:black;
+  }
+  
+  #inventoryStuff{
+  color:black;
+  background-color:white;
+  
+  }
+  
+  #sellQuestion{
+  color:white;
+  background-color:black;
   }
 
   .inventory {
@@ -168,6 +204,9 @@ body {
     float: right;
     height: 50%;
     overflow: auto;
+    .highlight {
+      background-color: yellow;
+    }
   }
 
 }

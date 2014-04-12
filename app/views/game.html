@@ -7,8 +7,8 @@
     <h3 id="blackM">Black Market</h3>
     </div>
     <tabset>
-      <tab heading="Buy">
-        <table class="table table-hover">
+      <tab heading="Buy" id="buy">
+        <table class="table table-hover" id="buyTable">
           <tr>
             <th>Item</th>
             <th>Price</th>
@@ -23,8 +23,8 @@
           </tr>
         </table>
       </tab>
-      <tab heading="Sell">
-      <h3>Selling anything today?</h3>
+      <tab heading="Sell" id="sell">
+      <h3 id="sellQuestion">Selling anything today?</h3>
     	<p>WARNING: You will lose all your inventory<p>
 		<a href="#" class="btn btn-larde btn-success"> Sell </a>
        <h4> Expected revenue: </h4>
@@ -32,15 +32,17 @@
     </tabset>
   </div>
 
-  <div class="inventory">
-    <table class="table">
+  <div class="inventory" id="inventoryBigHeader">
+  <h3 id="inventoryHeader">Inventory</h3>
+    <table class="table" id="inventoryStuff">
       <tr>
         <th>Name</th>
         <th>Hit factor</th>
       </tr>
-      <tr ng-repeat="inventory in player.inventory">
+      <tr ng-repeat="inventory in player.inventory" ng-class="{highlight: inventory.selected}">
         <td>{{inventory.name}}</td>
         <td>{{inventory.hitfactor}}</td>
+        <td><button type="button" class="btn btn-default btn-sm" ng-click="selectInv($index)">Select</button></td>
       </tr>
         
       </tr>
