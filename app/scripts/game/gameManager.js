@@ -6,10 +6,10 @@ app.service('GameManager', function($interval) {
   var player = {
     cash: 200,
     attentionLevel: 0, // 0 - 10
-    ecData: 0,
-    dataA: 0,
-    dataB: 0,
-    dataC: 0,
+    ecData: 10,
+    dataA: 10,
+    dataB: 10,
+    dataC: 10,
     bestKL: 0,
     inventory: [],
     marker: []

@@ -18,7 +18,7 @@ angular.module('honeypotApp')
     		$scope.player.inventory[idx].selected = true;
     	};
 
-    	GameMapService.addClickListeners(function(event)) {
+    	GameMapService.addClickListeners(function(event){
 
     		var temp = selectedIdx;
 
@@ -27,5 +27,5 @@ angular.module('honeypotApp')
 					GameManager.infect(marker, temp, length);
     			});
     		}
-    	})
+    	});
     });
