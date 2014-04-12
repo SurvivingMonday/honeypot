@@ -82,11 +82,13 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 		// map = new MapsApi($('#map-canvas')[0], mapOptions);
 	};
 
-	var addClickListeners = function(callback) {
-		maps.event.addListener(map, 'click', callback);
+	var addClickListeners = function(callback, markerCallback) {
+		maps.event.addListener(map, 'click', function(event) {
+			putKeylogger(event.latLong, callback, markerCallback);
+		});
 	};
 
-	var putKeylogger = function(location, title, callback, markerCallback) {
+	var putKeylogger = function(location, callback, markerCallback) {
 		markerCallback = markerCallback || angular.noop;
 
 		var image = {
@@ -103,7 +105,6 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 		var marker = new google.maps.Marker({
 			position: location,
 			map: map,
-			title:title,
 			icon: image
 		});
 
