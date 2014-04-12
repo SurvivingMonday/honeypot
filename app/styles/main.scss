@@ -177,5 +177,28 @@ background-color:black;
     height: 100%;
     float: left;
   }
+  
+  #inventoryHeader{
+  	color:white;
+  	background-color:black;
+  }
+  
+  #inventoryBigHeader{
+  
+  background-color:black;
+  }
+  
+  #inventoryStuff{
+  color:black;
+  background-color:white;
+  
+  }
+
+  .inventory {
+    width: 20%;
+    float: right;
+    height: 50%;
+    overflow: auto;
+  }
 
 }

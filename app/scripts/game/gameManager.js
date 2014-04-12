@@ -1,6 +1,6 @@
 'use strict';
 
-app.service('GameManager', function() {
+app.service('GameManager', function($interval) {
 
   // Player
   var player = {
