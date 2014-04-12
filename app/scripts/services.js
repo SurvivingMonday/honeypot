@@ -75,9 +75,7 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 	};
 
 	var addClickListeners = function(callback, markerCallback) {
-		maps.event.addListener(map, 'click', function(event) {
-			putKeylogger(event.latLong, callback, markerCallback);
-		});
+		maps.event.addListener(map, 'click', callback);
 	};
 
 	var putKeylogger = function(location, callback, markerCallback) {

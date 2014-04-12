@@ -2,10 +2,10 @@
 
 angular.module('honeypotApp')
     .controller('GameCtrl', function ($scope, GameManager, GameMapService) {
+
     	var selectedIdx = null;
     	$scope.player = GameManager.getPlayer();
     	$scope.blackMarket = GameManager.getBlackM();
-    	console.log($scope.player.inventory);
 
     	$scope.notifyBuy = GameManager.buy;
     	$scope.notifySell = GameManager.sell;
@@ -17,4 +17,15 @@ angular.module('honeypotApp')
     		selectedIdx = idx;
     		$scope.player.inventory[idx].selected = true;
     	};
+
+    	GameMapService.addClickListeners(function(event)) {
+
+    		var temp = selectedIdx;
+
+    		if (Math.random() < 0.5) {
+    			GameMapService.putKeylogger(event.latLng, function(length, marker){
+					GameManager.infect(marker, temp, length);
+    			});
+    		}
+    	})
     });
