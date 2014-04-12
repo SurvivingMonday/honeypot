@@ -73,13 +73,6 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 		//Associate the styled map with the MapTypeId and set it to display.
 		map.mapTypes.set('map_style', styledMap);
 		map.setMapTypeId('map_style');
-
-		// var mapOptions = {
-		// 	zoom: 15,
-		// 	center : startPointAnnArbor
-		// };
-
-		// map = new MapsApi($('#map-canvas')[0], mapOptions);
 	};
 
 	var addClickListeners = function(callback) {
@@ -91,7 +84,7 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 
 		var image = {
 
-			url: '/images/computers.png',
+		  url: '/images/computers.png',
 		  // This marker is 20 pixels wide by 32 pixels tall.
 		  size: new google.maps.Size(32, 35),
 		  // The origin for this image is 0,0.
