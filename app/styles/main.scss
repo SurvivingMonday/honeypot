@@ -22,8 +22,8 @@ html, body {
 }
 
 body {
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 
 }
 
@@ -34,6 +34,11 @@ body {
   background-size: 1440px 800px;
   background-repeat:no-repeat;
   display: compact;
+}
+
+.hpGame {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 
@@ -90,9 +95,9 @@ body {
 }
 
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1200px) {
     .container {
-        //max-width: 730px;
+        width: 100%;
     }
 
     /* Remove the padding we set earlier */
