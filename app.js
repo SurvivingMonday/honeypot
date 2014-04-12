@@ -3,6 +3,9 @@ var app = {};
 // begin duplicate
 	// Variables here
   var gametime;
+//  var location=0;
+//  location.x;
+//  location.y;
   var player = {};
   player.cash = 1000;
   player.attentionLevel = 0;  // scale: 0-10
@@ -81,8 +84,14 @@ var app = {};
   
   //utility functions
   gametime= setInterval(updateTime,1000);
-
-  
+//  window.onmousemove = handleMouseMove;
+/*  
+function handleMouseMove(event){
+      //Offset the position by 45 pixels so mouse is in center of crosshair
+      location.x = event.clientX;
+      location.y = event.clientY;
+    }  
+*/  
 function getCash(){    //display cash
       alert("Player Cash:" + " " + player.cash);
       return player.cash;
@@ -150,6 +159,7 @@ function buy(a){   //buy from BlackM
         return;
       }
     }
+
 /*
 function sell(){  // sell to BlackM
       return (
@@ -160,8 +170,12 @@ function sell(){  // sell to BlackM
       );
     }
 */
+
 function infectEasy(){
       alert("Infecting location with easy keylogger");
+      handleMouseMove(event);
+      alert(location.x);
+      alert(location.y);
       infect(Easy);
     }
 function infectMedium(){
