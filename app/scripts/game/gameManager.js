@@ -220,7 +220,5 @@ app.service('GameManager', function($interval) {
     }
   };
 
-  $interval(
-
-  );
+  $interval(this.update, 1000);
 });
