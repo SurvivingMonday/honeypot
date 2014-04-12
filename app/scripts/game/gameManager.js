@@ -240,9 +240,8 @@ app.service('GameManager', function($interval, GameMapService) {
 
       }
       if(player.marker[i].duration === 5) {
-        console.log('h');
+
         GameMapService.brokenKeyLogger(player.marker[i]);
-        console.log('g');
       }
       if(player.marker[i].duration < 0){
         player.marker[i].setMap(null);

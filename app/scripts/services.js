@@ -122,14 +122,13 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 
 	// This should be called when keylogger successfully takes in data.
 	var animateMarker = function(marker) {
-
-		marker.animation = google.maps.Animation.BOUNCE;
+		marker.setAnimation(google.maps.Animation.BOUNCE);
 	};
 
 	// Called when key logger is broken.
 	var brokenKeyLogger = function(marker) {
 
-		/*var newImage = {
+		var newImage = {
 
 			url: '/images/ant-export.png',
 			// This marker is 20 pixels wide by 32 pixels tall.
@@ -138,9 +137,9 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 			origin: new google.maps.Point(0,0),
 			// The anchor for this image is the base of the icon at 0,32.
 			anchor: new google.maps.Point(15, 40)
-		};*/
-    marker.animation = google.maps.Animation.BOUNCE;
-		//marker.icon = newImage;
+		};
+
+		marker.setIcon(newImage);
 	};
 
 	initMap();
