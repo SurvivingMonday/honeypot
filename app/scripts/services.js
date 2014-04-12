@@ -16,9 +16,9 @@ app.factory('maps', function() {
 	return google.maps;
 });
 
-app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
+app.factory('gameMapService', function(PlacesApi, MapsApi, $, maps) {
 	var map;
-	var startPointAnnArbor = maps.LatLng(42.2814, -83.7483);
+	var startPointAnnArbor = new maps.LatLng(42.2814, -83.7483);
 
 	var initMap = function() {
 		var mapOptions = {
@@ -56,7 +56,7 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 		});
 	};
 
-	initMap();
+	setTimeout(initMap, 1000);
 	return {
 		addClickListeners: addClickListeners,
 		putKeylogger: putKeylogger
