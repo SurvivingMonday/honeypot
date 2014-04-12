@@ -2,6 +2,7 @@ var app = {};
 
 // begin duplicate
 	// Variables here
+  var gametime;
   var player = {};
   player.cash = 1000;
   player.attentionLevel = 0;  // scale: 0-10
@@ -12,7 +13,7 @@ var app = {};
   player.produce.crypteddata = 0;
   player.produce.creditcard = 0;
   player.produce.identity = 0;
-  //document.write(player.cash);
+
 	// 3 Types of Keylogger( Beginner, Medium, Hard)
 	// hitfactor and risk to be generate depending on type.
 	// Keylogger Begin
@@ -45,31 +46,46 @@ var app = {};
     risk: 0.6,
     hitfactor: 0.8
   };
-  //document.write(player.produce.creditcard);
-  //document.write("Hi");
+
 	//BlackM
 	var blackm={};
 	blackm.onsale=[];
 	blackm.onsale.push(Easy);
 	blackm.onsale.push(Medium);
 	blackm.onsale.push(Hard);
-  //document.write("Hi");
+
 
 
   
   //Marker
-  var Marker = {};
-  Marker.type;
-  Marker.duration; // scale 0-100
-  Marker.generation; // scale 40-80
-  Marker.timer;   // if timer == 0;
-  //document.write("Higher");
+  var MarkerEasy= {};
+  MarkerEasy.type=Easy.level;
+  MarkerEasy.timer=10
+  MarkerEasy.duration= 30;
+  MarkerEasy.generation= 40; 
+  MarkerEasy.pub=1; // 1 == public area to generate, 0 private area
 
+  var MarkerMedium= {};
+  MarkerMedium.type=Medium.level;
+  MarkerMedium.timer=10
+  MarkerMedium.duration= 60;
+  MarkerMedium.generation= 60; 
+  MarkerMedium.pub=1;
+  
+  var MarkerHard= {};
+  MarkerHard.type=Hard.level;
+  MarkerHard.timer=10;
+  MarkerHard.duration= 90;
+  MarkerHard.generation=80; 
+  MarkerHard.pub=1;
+  
+  gametime= setInterval(updateTime,1000);
+  
 function getCash(){    //display cash
       alert("Player Cash:" + " " + player.cash);
       return player.cash;
     }
-
+    
 function getAttention(){    //display cash
       alert(player.attentionLevel);
       return player.attentionLevel;
@@ -125,7 +141,7 @@ function buy(a){   //buy from BlackM
       if (player.cash >= a.price){
         player.cash -= a.price;
         player.inventory.push(a);
-        blackm.onsale.delete(a);
+        //blackm.onsale.delete(a);
         return;
       } else {
         alert("You do not have enough money!");
@@ -141,34 +157,68 @@ function sell(){  // sell to BlackM
       blackm.sellprice.identity * player.produce.identity
       );
     }
+*/
+function infectEasy(){
+      alert("Infecting location with easy keylogger");
+      infect(Easy);
+    }
+function infectMedium(){
+      alert("Infecting location with Medium keylogger");
+      infect(Medium);
+    }
+function infectHard(){
+      alert("Infecting location with Hard keylogger");
+      infect(Hard);
+    }
+    
 function infect(a){
-      player.inventory.delete(a);
-      if(Math.random()> 0.5){   // success of infecting
-        var b = new Marker;  // needs to be dynamic
-        b.type = a.level;
-        b.duration = Math.floor((Math.random()*100))%(30*b.type); // better type has higher duration
-        b.generation = Math.floor(100*a.hitrate);
-        player.attentionLevel+= a.risk;
-        player.marker.push(b);
-      }
+      if(player.inventory.indexOf(a) != -1){
+        player.inventory.pop(a);
+        if(Math.random()> 0.5){   // success of infecting
+          alert("Infect Successful");
+          player.attentionLevel+=a.risk*100;
+          switch(a.level){
+            case 1:
+                 player.marker.push(MarkerEasy);
+                 break;
+            case 2:
+                 player.marker.push(MarkerMedium);
+                 break;
+            case 3:
+                 player.marker.push(MarkerHard);
+                 break;
+             default:
+                  break;
+          }
+        }
+        else{
+          alert("Unsuccessful infect");
+        }
+       }
+       else{
+          alert("Player does not have keylogger of this type");
+       }
       return;
     }
+
+
+    
 function updateTime(){
-      for (var i=0;i<player.marker.length;i++){	 
+       for (var i=0;i<player.marker.length;i++){	 
         player.marker[i].timer-=1;
         player.marker[i].duration-=1;
         if(player.marker[i].timer==0){
-          player.produce.uncrypteddata+=player.marker[i].generate;
+          player.produce.crypteddata+=player.marker[i].generation;
           player.marker[i].timer=10;
         }
         if(player.marker[i].duration<0){
-          player.marker.delete(player.marker[i]);
+          player.marker.pop(player.marker[i]);
           i--;
         }
       }
       return;
     }
-*/    
+  
 // end duplicate
 
 /*

@@ -148,9 +148,12 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 	};
 
 	initMap();
+
 	return {
 		addClickListeners: addClickListeners,
-		putKeylogger: putKeylogger
+		putKeylogger: putKeylogger,
+		animateMarker : animateMarker,
+		brokenKeyLogger: brokenKeyLogger
 	};
 });
 
