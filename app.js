@@ -72,17 +72,18 @@ app.prototype = function (){
 	// Keylogger Begin
 	var Easy = {
     name: "TT130",
-    type: "Easy",
+    type: "Keylogger",
+    level: 0,
     price: 100,
     risk: 0.2,
     hitfactor: 0.4
   };
-
 	
 	// Keylogger Medium
 	var Medium = {
     name: "TT230",
-    type: "Medium",
+    type: "Keylogger",
+    level: 1,
     price: 200,
     risk: 0.4,
     hitfactor: 0.6
@@ -92,7 +93,8 @@ app.prototype = function (){
 	// Keylogger Hard
 	var Hard = {
     name: "TT330",
-    type: "Hard",
+    type: "Keylogger",
+    level: 2,
     price: 400,
     risk: 0.6,
     hitfactor: 0.8
