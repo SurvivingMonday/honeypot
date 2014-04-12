@@ -34,11 +34,11 @@
             },
             {
               featureType: "road.arterial",
-              elementType: "geometry",
+              elementType: "labels",
               
               stylers: [
                 { hue: "#00ffee" },
-                { saturation: 0 }
+                { saturation: -50 }
               ]
             },
             {
@@ -55,7 +55,7 @@
           var styledMap = new google.maps.StyledMapType(styles,
           {
               name: "Styled Map",
-              minZoom: 10,
+              minZoom: 11,
               maxZoom: 15
           });
 
@@ -139,6 +139,7 @@
           position: place.geometry.location,
           animation: google.maps.Animation.BOUNCE,
           icon: image
+          
         });
 
         google.maps.event.addListener(marker, 'mouseover', function() {
