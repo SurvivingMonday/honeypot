@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('honeypotApp')
+<<<<<<< HEAD
 .controller('GameCtrl', function ($scope, $timeout, GameManager, GameMapService) {
 
 	var selectedIdx = null;

@@ -11,7 +11,7 @@
         <table class="table table-hover" id="buyTable">
           <tr>
             <th>Item</th>
-            <th>Price</th>
+            <th>Price(No Refunds)</th>
             <th></th>
           </tr>
           <tr ng-repeat="item in blackMarket.onsale">
@@ -26,8 +26,8 @@
       <tab heading="Sell" id="sell">
       <h3>Selling anything today?</h3>
     	<p>WARNING: You will lose all your inventory<p>
-		<a href="#" class="btn btn-larde btn-success"> Sell </a>
-       <h4> Expected revenue: </h4>
+		<button type="button" class="btn btn-larde btn-success" ng-click="notifySell($index)">Sell</button>
+
     </tab>
     </tabset>
   </div>
