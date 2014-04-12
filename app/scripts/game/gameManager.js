@@ -11,10 +11,11 @@ angular.module('honeypotGame', ['ngCookies'])
       this.dataC = 0;
       this.inventory = {};
 
+      // Player Private functions
+
       // Inventories
-      // 0: Keylogger, 1: Analyzer, 2:Servers
+      // 0: Keylogger, 1: Analyzer
       // ------------ Keyloggers ------------
-      // -- TT130
       var k1 = {
         name: 'TT130',
         type: 0,
@@ -116,6 +117,8 @@ angular.module('honeypotGame', ['ngCookies'])
       blackm.onsale = {};
       blackm.onsale.keylogger = {};
 
+
+      // Public functions
       this.initGame = function () {
         this.cash = 0;
         this.inventory = {};
