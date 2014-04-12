@@ -4,10 +4,7 @@
   <div id="map-canvas"></div>
   <div class="market">
     <div class="black_market_title">
-    
-    
     <h3>Black Market</h3>
-    
     </div>
     <tabset>
       <tab heading="Buy">
@@ -23,14 +20,26 @@
         </table>
       </tab>
       <tab heading="Sell">
-      
       <h3>Selling anything today?</h3>
     	<p>WARNING: You will lose all your inventory<p>
 		<a href="#" class="btn btn-larde btn-success"> Sell </a>
        <h4> Expected revenue: </h4>
-      
-      
     </tab>
     </tabset>
+  </div>
+
+  <div class="inventory">
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Hit factor</th>
+      </tr>
+      <tr ng-repeat="inventory in player.inventory">
+        <td>{{inventory.name}}</td>
+        <td>{{inventory.hitfactor}}</td>
+      </tr>
+        
+      </tr>
+    </table>
   </div>
 </div>

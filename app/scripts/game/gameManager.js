@@ -1,6 +1,6 @@
 'use strict';
 
-app.service('GameManager', function() {
+app.service('GameManager', function($interval) {
 
   // Player
   var player = {
@@ -167,5 +167,9 @@ app.service('GameManager', function() {
       blackm.sellprice.creditcard * player.produce.creditcard +
       blackm.sellprice.identity * player.produce.identity
     );
-  }
+  };
+
+  $interval(function() {
+    player.cash -= 10;
+  }, 5000);
 });
