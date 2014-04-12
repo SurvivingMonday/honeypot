@@ -1,6 +1,6 @@
 var app = {};
 
-/*
+
 // to test -> consule.log - button onclick call function
 // begin duplicate
 	// Variables here
@@ -8,7 +8,6 @@ var app = {};
     player.cash = 0;
     player.inventory = [];
 	document.write(player.cash);
-
 	// 3 Types of Keylogger( Beginner, Medium, Hard)
 	// hitfactor and risk to be generate depending on type.
 	// Keylogger Begin
@@ -17,7 +16,7 @@ var app = {};
 	Easy.price = 100; 
 	Easy.risk = 0.2; 
 	Easy.hitfactor = 0.4;
-	
+	document.write(player.cash);
 	// Keylogger Medium
 	var Medium ={};
 	Medium.type="Medium";
@@ -31,33 +30,41 @@ var app = {};
 	Hard.price = 400;
 	Hard.risk = 0.6;
 	Hard.hitfactor = 0.8;
-document.write(Hard.type);
-
+	document.write(player.cash);
 	//BlackM
+	
 	var blackm = {};
 	blackm.credentials=[];
 	blackm.creditcard=[];
 	blackm.unencrypteddata=[];
 	blackm.identity=[];
 	blackm.keylogger=[];
-/*	blackm.keylogger.push("keyloggerA": Begin);
-	blackm.keylogger.push("keyloggerB": Medium);
-	blackm.keylogger.push("keyloggerC": Hard);
-*/	
-/*
+	blackm.keylogger.push(Begin);
+	blackm.keylogger.push(Medium);
+	blackm.keylogger.push(Hard);
+	document.write(player.cash);
+		
+
 function getCash(){
-	player.cash+=1;
+	alert(player.cash);
 	return player.cash;
 }
-*/	
+	
 // end duplicate
-
-app.prototype = function () {    
+/*
+app.prototype = function (){    
     
 	// Variables here
-    var player = {};
-    player.cash = 0;
-    player.inventory = [];
+  var player = {};
+  player.cash = 0;
+  player.inventory = [];
+  player.produce = {};
+  player.produce.credentials = 0;
+  player.produce.unencrypteddata = 0;
+  player.produce.creditcard = 0;
+  player.produce.identity = 0;
+
+
 	
 	// 3 Types of Keylogger( Beginner, Medium, Hard)
 	// hitfactor and risk to be generate depending on type.
@@ -84,14 +91,10 @@ app.prototype = function () {
 	
 	//BlackM
 	var blackm = {};
-	blackm.credentials=[];
-	blackm.creditcard=[];
-	blackm.unencrypteddata=[];
-	blackm.identity=[];
-	blackm.keylogger=[];
-	blackm.keylogger.push("keyloggerA": Begin);
-	blackm.keylogger.push("keyloggerB": Medium);
-	blackm.keylogger.push("keyloggerC": Hard);
+	blackm.onsale = {};
+	blackm.onsale.push(Begin);
+	blackm.onsale.push(Medium);
+	blackm.onsale.push(Hard);
 
 	//var asset ={}; // Assets Uncrypted data(credentials,uncrypted data)	
 	//asset.uncrypteddata=0;
@@ -114,18 +117,29 @@ app.prototype = function () {
 			return
 		},
 		buy: function(a){   //buy from BlackM
-			if(player.cash >= blackm.keylogger[a].price){
-						player.cash-=blackm.keylogger[a].price;
-						player.inventory.push(a:blackm.keylogger[a]);
-			}
-			return;  
+
+			return (
+        if(player.cash >= a.price){
+          player.cash -= a.price;
+          player.inventory.push(a);
+          blackm.onsale.delete(a);
+        } else {
+          alert("You do not have enough money!");
+        }
+			);
 		},
-		sell: function(b){  // sell to BlackM
-			return
-		}	
+    sell: function(){  // sell to BlackM
+
+      return (
+      blackm.sellprice.unencrypteddata * player.produce.unencrypteddata +
+      blackm.sellprice.credentials * player.produce.credentials +
+      blackm.sellprice.creditcard * player.produce.creditcard +
+      blackm.sellprice.identity * player.produce.identity
+      );
+    }
 	}
 }
-
+*/
 
 //infect
 // decrements cash, increase risk, increase active keyloggers
@@ -138,3 +152,5 @@ app.prototype = function () {
 
 //updateRisk
 // called within infect
+
+
