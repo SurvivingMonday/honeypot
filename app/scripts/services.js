@@ -18,7 +18,7 @@ app.factory('maps', function() {
 
 
 app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
-	
+
 	var map;
 	var startPointAnnArbor = new maps.LatLng(42.2814, -83.7483);
 
@@ -146,16 +146,11 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 		marker.icon = newImage;
 	};
 
-		// google.maps.event.addListener(marker, 'mouseover', function() {
-		// infowindow.setContent(place.name);
-		// infowindow.open(map, this);
-	// });
-
-initMap();
-return {
-	addClickListeners: addClickListeners,
-	putKeylogger: putKeylogger
-};
+	initMap();
+	return {
+		addClickListeners: addClickListeners,
+		putKeylogger: putKeylogger
+	};
 });
 
 
