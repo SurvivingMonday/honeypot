@@ -24,10 +24,10 @@
         </table>
       </tab>
       <tab heading="Sell" id="sell">
-    
-      <h3 id="sellQuestion">Selling anything today?</h3>
+      <h3>Selling anything today?</h3>
     	<p>WARNING: You will lose all your inventory<p>
-		<a href="#" class="btn btn-larde btn-success"> Sell </a>
+		<button type="button" class="btn btn-larde btn-success" ng-click="notifySell($index)">Sell</button>
+
     </tab>
     </tabset>
   </div>
@@ -39,12 +39,17 @@
         <th>Name</th>
         <th>Hit factor</th>
       </tr>
-      <tr ng-repeat="inventory in player.inventory">
+      <tr ng-repeat="inventory in player.inventory" ng-class="{highlight: inventory.selected}">
         <td>{{inventory.name}}</td>
         <td>{{inventory.hitfactor}}</td>
+        <td><button type="button" class="btn btn-default btn-sm" ng-click="selectInv($index)">Select</button></td>
       </tr>
         
       </tr>
     </table>
   </div>
+</div>
+
+<div id="game-notify" ng-show="show-message">
+  <div ng-model="notify-message"></div>
 </div>

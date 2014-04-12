@@ -118,8 +118,9 @@ body {
     .jumbotron {
         border-bottom: 0;
     }
+}
 
-  .navbar.main-nav {
+.navbar.main-nav {
   background-color: #3832D4;
     .navbar-brand {
       color: white;
@@ -153,9 +154,9 @@ body {
   }
 
 #blackM{
-	color:white;
-	background-color:black;
-	
+  color:white;
+  background-color:black;
+  
 
 }
 
@@ -179,8 +180,8 @@ background-color:black;
   }
   
   #inventoryHeader{
-  	color:white;
-  	background-color:black;
+    color:white;
+    background-color:black;
   }
   
   #inventoryBigHeader{
@@ -210,4 +211,9 @@ background-color:black;
     }
   }
 
-}
+  #game-notify {
+    width: 75%;
+    position: fixed;
+    left: 50%;
+    margin: 0 0 0 -37.5%;
+  }

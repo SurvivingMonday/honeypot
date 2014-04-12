@@ -16,7 +16,6 @@ app.factory('maps', function() {
 	return google.maps;
 });
 
-
 app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 
 	var map;
@@ -76,9 +75,7 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 	};
 
 	var addClickListeners = function(callback, markerCallback) {
-		maps.event.addListener(map, 'click', function(event) {
-			putKeylogger(event.latLong, callback, markerCallback);
-		});
+		maps.event.addListener(map, 'click', callback);
 	};
 
 	var putKeylogger = function(location, callback, markerCallback) {
@@ -92,7 +89,7 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 		  // The origin for this image is 0,0.
 		  origin: new google.maps.Point(0,0),
 		  // The anchor for this image is the base of the icon at 0,32.
-		  anchor: new google.maps.Point(0, 32)
+		  anchor: new google.maps.Point(15, 40)
 		};
 
 		var marker = new google.maps.Marker({
@@ -103,7 +100,7 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 
 		maps.event.addListener(marker, 'click', markerCallback);
 
-		var service = new PlacesApi(map);
+		var service = new PlacesApi.PlacesService(map);
 
 		var request = {
 			location: location,
@@ -134,7 +131,7 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 			// The origin for this image is 0,0.
 			origin: new google.maps.Point(0,0),
 			// The anchor for this image is the base of the icon at 0,32.
-			anchor: new google.maps.Point(0, 32)
+			anchor: new google.maps.Point(15, 40)
 		};
 
 		marker.icon = newImage;
