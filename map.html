@@ -23,6 +23,37 @@
 
       function initialize() {
           
+          // Create an array of styles.
+          var styles = [
+            {
+              featureType: "all",
+              stylers: [
+                { saturation: -100 }
+              ]
+            },
+            {
+              featureType: "road.arterial",
+              elementType: "geometry",
+              
+              stylers: [
+                { hue: "#00ffee" },
+                { saturation: 0 }
+              ]
+            },
+            {
+              featureType: "poi.business",
+              elementType: "labels",
+              
+              stylers: [
+                { visibility: "simplified" }
+              ]
+            }
+          ];
+          // Create a new StyledMapType object, passing it the array of styles,
+          // as well as the name to be displayed on the map type control.
+          var styledMap = new google.maps.StyledMapType(styles,
+            {name: "Styled Map"});
+
           // More map coordinates.
           var startPointAnnArbor = new google.maps.LatLng(42.2814, -83.7483);
 
@@ -35,6 +66,10 @@
           // Make the map object.
           map = new google.maps.Map(document.getElementById('map-canvas'),
                 mapOptions);
+          
+          //Associate the styled map with the MapTypeId and set it to display.
+          map.mapTypes.set('map_style', styledMap);
+          map.setMapTypeId('map_style');
 
           // Place them on the map.
           createMarker(startPointAnnArbor);
@@ -49,22 +84,6 @@
           var service = new google.maps.places.PlacesService(map);
           service.nearbySearch(request, callBack);
       }
-
-      // // Places a marker on the map.
-      // function placeMarker(location, map) {
-
-      //   var marker = new google.maps.Marker({
-      //     position: location,
-      //     map: map
-      //   });
-
-      //   google.maps.event.addListener(marker, 'mouseover', function() {
-      //     infowindow.setContent("hello");
-      //     infowindow.open(map, this);
-      //   });
-
-      //   map.panTo(location);
-      // }
 
       function callBack(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -98,18 +117,19 @@
 
         var image = {
 
-          url: 'app/images/computers.png',
+          url: 'app/images/ant-export.png',
           // This marker is 20 pixels wide by 32 pixels tall.
           size: new google.maps.Size(32, 35),
           // The origin for this image is 0,0.
           origin: new google.maps.Point(0,0),
-          // The anchor for this image is the base of the flagpole at 0,32.
+          // The anchor for this image is the base of the icon at 0,32.
           anchor: new google.maps.Point(0, 32)
         };
 
         var placeLoc = place.geometry.location;
 
         var marker = new google.maps.Marker({
+
           map: map,
           position: place.geometry.location,
           animation: google.maps.Animation.BOUNCE,
@@ -119,6 +139,7 @@
         google.maps.event.addListener(marker, 'mouseover', function() {
           infowindow.setContent(place.name);
           infowindow.open(map, this);
+          // animation: google.maps.Animation.BOUNCE;
         });
       }
 
