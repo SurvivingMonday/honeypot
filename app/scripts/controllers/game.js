@@ -25,7 +25,7 @@ angular.module('honeypotApp')
 
         } else {
           var temp = selectedIdx;
-
+          console.log(temp);
           if (Math.random() < 0.8) {
             GameMapService.putKeylogger(event.latLng, function(length, marker){
               GameManager.infect(marker, temp, length);
