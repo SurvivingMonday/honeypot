@@ -4,12 +4,12 @@ app.service('GameManager', function($interval) {
 
   // Player
   var player = {
-    cash: 200,
+    cash: 10000,
     attentionLevel: 0, // 0 - 10
-    ecData: 0,
-    dataA: 0,
-    dataB: 0,
-    dataC: 0,
+    ecData: 10,
+    dataA: 10,
+    dataB: 10,
+    dataC: 10,
     points: 0,
     inventory: [],
     marker: []
@@ -205,15 +205,10 @@ app.service('GameManager', function($interval) {
   };
 
   this.infect = function (a, b, c) {
-    if(player.inventory.length !== -1) {
-      // TODO append a into marker array
-      player.cash -= player.inventory[b].installationCost;
-      player.attentionLevel += player.inventory[b].risk * 100;
-      player.points += c * 100;
-    }
-    else{
-      AlertCallBack('Player does not have keylogger!');
-    }
+    player.marker.push(a);
+    player.cash -= player.inventory[b].installationCost;
+    player.attentionLevel += player.inventory[b].risk * 100;
+    player.points += c * 100;
   };
 
   this.update = function () {
