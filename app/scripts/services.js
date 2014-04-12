@@ -116,7 +116,6 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 		console.log(service.nearbySearch);
 
 		service.nearbySearch(request, function(results) {
-			console.log('called!!!');
 			callback(results.length, marker);
 		});
 	};

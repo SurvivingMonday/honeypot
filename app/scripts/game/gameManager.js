@@ -205,19 +205,31 @@ app.service('GameManager', function($interval) {
   };
 
   this.infect = function (a, b, c) {
+    a.countdown = Math.floor((Math.random()*5)+1);
+    a.duration = player.inventory[b].expiryTime + Math.floor((Math.random()*30)+1);
+    a.timer = 0;
+    a.index = b;
+
     player.marker.push(a);
+    console.log(b);
     player.cash -= player.inventory[b].installationCost;
+    console.log(player.cash);
     player.attentionLevel += player.inventory[b].risk * 100;
     player.points += c * 100;
   };
 
   this.update = function () {
     for (var i = 0; i < player.marker.length; i++){
-      player.marker[i].timer -= 1;
       player.marker[i].duration -= 1;
-      if(player.marker[i].timer === 0) {
-        player.ecData += player.marker[i].generation;
-        player.marker[i].timer = 10;
+      if (player.marker[i].countdown === 0) {
+        player.marker[i].countdown -= 1;
+        player.marker[i].timer = player.marker[i].duration;
+      } else if (player.marker[i].countdown === -1) {
+        player.marker[i].timer -= 1
+        player.ecData += player.inventory[player.marker[i].index].hitfactor;
+      }
+      if(player.marker[i].duration === 5) {
+        player.marker[i].brokenKeyLogger(marker[i]);
       }
       if(player.marker[i].duration < 0){
         player.marker.pop(player.marker[i]);

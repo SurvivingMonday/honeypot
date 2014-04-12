@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('honeypotApp')
-.controller('GameCtrl', function ($scope, $timeout, GameManager, GameMapService) {
+app.controller('GameCtrl', function ($scope, $timeout, GameManager, GameMapService) {
 
 	var selectedIdx = null;
 	var errorNotify = function(str) {
@@ -39,13 +38,13 @@ angular.module('honeypotApp')
 			errorNotify('You did not select a key logger.');
 		}
 		else {
-			var temp = selectedIdx;
-
-			if (Math.random() < 0.8) {
-				GameMapService.putKeylogger(event.latLng, function(length, marker){
-					GameManager.infect(marker, temp, length);
-				});
-			}
-		}
+      var temp = selectedIdx;
+      if (Math.random() < 0.8 && temp !== null) {
+        GameMapService.putKeylogger(event.latLng, function (length, marker) {
+          GameManager.infect(marker, temp, length);
+          $scope.player = GameManager.getPlayer();
+        });
+      }
+    }
 	});
 });
