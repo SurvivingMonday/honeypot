@@ -38,9 +38,10 @@
         <th>Name</th>
         <th>Hit factor</th>
       </tr>
-      <tr ng-repeat="inventory in player.inventory">
+      <tr ng-repeat="inventory in player.inventory" ng-class="{highlight: inventory.selected}">
         <td>{{inventory.name}}</td>
         <td>{{inventory.hitfactor}}</td>
+        <td><button type="button" class="btn btn-default btn-sm" ng-click="selectInv($index)">Select</button></td>
       </tr>
         
       </tr>

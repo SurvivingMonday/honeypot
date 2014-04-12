@@ -168,6 +168,9 @@ body {
     float: right;
     height: 50%;
     overflow: auto;
+    .highlight {
+      background-color: yellow;
+    }
   }
 
 }
