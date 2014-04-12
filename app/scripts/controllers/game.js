@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('honeypotApp')
-.controller('GameCtrl', function ($scope, $timeout, GameManager, GameMapService) {
+app.controller('GameCtrl', function ($scope, $timeout, GameManager, GameMapService) {
 
 	var selectedIdx = null;
 	var errorNotify = function(str) {
