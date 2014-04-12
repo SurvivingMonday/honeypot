@@ -21,17 +21,14 @@ html, body {
 }
 
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
   background-image:url("../images/background.png");
   background-size: 1440px 800px;
   background-repeat:no-repeat;
   display: compact;
-  
-  .jumbotron{
-	background:transparent;
-  }
 }
+
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
@@ -57,8 +54,8 @@ body {
 /* Custom page footer */
 .footer {
     padding-top: 19px;
-    color: #777;
-    border-top: 1px solid #e5e5e5;
+    color: #000;
+    border-top: 1px solid #000000;
 }
 
 .container-narrow > hr {
@@ -68,7 +65,7 @@ body {
 /* Main marketing message and sign up button */
 .jumbotron {
     text-align: center;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #000000;
 }
 
 .jumbotron .btn {
