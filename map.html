@@ -37,27 +37,36 @@
                 mapOptions);
 
           // Place them on the map.
-          placeMarker(startPointAnnArbor, map);
+          createMarker(startPointAnnArbor);
 
           var request = {
             location: startPointAnnArbor,
             radius: '9000',
-            types: ['store']
+            types: ['school', 'cafe', 'restaurant', 'food', 'airport', 
+                    'bank', 'atm', 'embassy']
           };
 
           var service = new google.maps.places.PlacesService(map);
-          service.nearbySearch(request, callback);
+          service.nearbySearch(request, callBack);
       }
 
-      function placeMarker(location, map) {
-        var marker = new google.maps.Marker({
-          position: location,
-          map: map
-        });
-        map.panTo(location);
-      }
+      // // Places a marker on the map.
+      // function placeMarker(location, map) {
 
-      function callback(results, status) {
+      //   var marker = new google.maps.Marker({
+      //     position: location,
+      //     map: map
+      //   });
+
+      //   google.maps.event.addListener(marker, 'mouseover', function() {
+      //     infowindow.setContent("hello");
+      //     infowindow.open(map, this);
+      //   });
+
+      //   map.panTo(location);
+      // }
+
+      function callBack(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
           for (var i = 0; i < results.length; i++) {
             var place = results[i];
@@ -78,11 +87,33 @@
             content: contentString
       });
 
+      // Create
       function createMarker(place) {
+
+        var photos = place.photos;
+
+        if (!photos) {
+          return;
+        }
+
+        var image = {
+
+          url: 'app/images/computers.png',
+          // This marker is 20 pixels wide by 32 pixels tall.
+          size: new google.maps.Size(32, 35),
+          // The origin for this image is 0,0.
+          origin: new google.maps.Point(0,0),
+          // The anchor for this image is the base of the flagpole at 0,32.
+          anchor: new google.maps.Point(0, 32)
+        };
+
         var placeLoc = place.geometry.location;
+
         var marker = new google.maps.Marker({
           map: map,
-          position: place.geometry.location
+          position: place.geometry.location,
+          animation: google.maps.Animation.BOUNCE,
+          icon: image
         });
 
         google.maps.event.addListener(marker, 'mouseover', function() {
