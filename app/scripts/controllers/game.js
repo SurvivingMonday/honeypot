@@ -40,11 +40,13 @@ app.controller('GameCtrl', function ($scope, $timeout, GameManager, GameMapServi
 		}
 		else {
       var temp = selectedIdx;
-      if (Math.random() < 0.8 && temp !== null) {
+      if (Math.random() < 0.7 && temp !== null) {
         GameMapService.putKeylogger(event.latLng, function (length, marker) {
           GameManager.infect(marker, temp, length);
           $scope.player = GameManager.getPlayer();
         });
+      } else {
+      	errorNotify('Keylogger deployment failed!!');
       }
     }
 	});
