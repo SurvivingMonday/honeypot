@@ -12,10 +12,14 @@
           <tr>
             <th>Item</th>
             <th>Price</th>
+            <th></th>
           </tr>
           <tr ng-repeat="item in blackMarket.onsale">
             <td>{{item.name}}</td>
             <td>${{item.price}}</td>
+            <td>
+              <button type="button" class="btn btn-default btn-sm" ng-click="notifyBuy($index)">Buy</button>
+            </td>
           </tr>
         </table>
       </tab>
