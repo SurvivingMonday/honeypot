@@ -17,7 +17,6 @@
       src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true">
     </script>
 
-
     <script type="text/javascript">
       
       var map;
@@ -122,7 +121,7 @@
 
         var image = {
 
-          url: 'app/images/ant-export.png',
+          url: 'app/images/computers.png',
           // This marker is 20 pixels wide by 32 pixels tall.
           size: new google.maps.Size(32, 35),
           // The origin for this image is 0,0.
@@ -137,12 +136,32 @@
 
           map: map,
           position: place.geometry.location,
-          
-          // Animation for the markers.
-          animation: google.maps.Animation.BOUNCE,
           icon: image
 
         });
+
+        // This should be called when keylogger successfully takes in data.
+        function animateMarker(marker) {
+
+          marker.animation = google.maps.Animation.BOUNCE;
+        }
+
+        // Called when key logger is broken.
+        function brokenKeyLogger(marker) {
+
+          var newImage = {
+
+            url: 'app/images/ant-export.png',
+            // This marker is 20 pixels wide by 32 pixels tall.
+            size: new google.maps.Size(32, 35),
+            // The origin for this image is 0,0.
+            origin: new google.maps.Point(0,0),
+            // The anchor for this image is the base of the icon at 0,32.
+            anchor: new google.maps.Point(0, 32)
+          };
+
+          marker.icon = image;
+        }
 
         google.maps.event.addListener(marker, 'mouseover', function() {
           infowindow.setContent(place.name);
