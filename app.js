@@ -49,10 +49,43 @@ app.prototype = function () {
         getCash: function () {    //display cash
             return player.cash;    
         },
-		getinventory: function(){   // buy from
-		
-			player.cash-=player.inventory.price;
-			return  
-		}
+		getinventory function(a){   // buy from blackm
+			if(player.cash >= blackm.keylogger[a].price){
+						player.cash-=blackm.keylogger[a].price;
+						player.inventory.push(a:blackm.keylogger[a]);
+						
+			}
+			return;  
+		},
+		sell: function(b){ 
 	}
 }
+
+//getCash()
+// display on screen
+
+//getInventory
+// display on screen
+
+//getBlackM
+// display on screen
+
+//getRisk
+// display on screen
+
+//infect
+// decrements cash, increase risk, increase active keyloggers
+
+//buy
+// buy items from blackmarket
+
+//sell
+// sell items to blackmarket
+
+//updateCash
+// updates cash received depening on active keylogger
+
+//updateBlackMItem
+
+//updateRisk
+// called within infect
