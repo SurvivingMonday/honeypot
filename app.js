@@ -121,9 +121,15 @@ app.prototype = function () {
 			}
 			return;  
 		},
-		sell: function(b){  // sell to BlackM
-			return
-		}	
+    sell: function(){  // sell to BlackM
+    
+      return (
+      blackm.sellprice.unencrypteddata * player.produce.unencrypteddata +
+      blackm.sellprice.credentials * player.produce.credentials +
+      blackm.sellprice.creditcard * player.produce.creditcard +
+      blackm.sellprice.identity * player.produce.identity
+      );
+    }
 	}
 }
 */
@@ -139,3 +145,5 @@ app.prototype = function () {
 
 //updateRisk
 // called within infect
+
+
