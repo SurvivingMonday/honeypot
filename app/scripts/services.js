@@ -146,16 +146,14 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 		marker.icon = newImage;
 	};
 
-		// google.maps.event.addListener(marker, 'mouseover', function() {
-		// infowindow.setContent(place.name);
-		// infowindow.open(map, this);
-	// });
-
-initMap();
-return {
-	addClickListeners: addClickListeners,
-	putKeylogger: putKeylogger
-};
+	initMap();
+	
+	return {
+		addClickListeners: addClickListeners,
+		putKeylogger: putKeylogger,
+		animateMarker : animateMarker,
+		brokenKeyLogger: brokenKeyLogger
+	};
 });
 
 
