@@ -42,6 +42,8 @@ body {
 }
 
 
+
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
@@ -126,7 +128,8 @@ body {
       color: white;
     }
     .navbar-nav >li > a {
-      color: white;
+      color: black;
+      background-color:white;
     }
   }
 
@@ -145,6 +148,14 @@ body {
     float: right;
     overflow: auto;
   }
+
+#blackM{
+	color:white;
+	
+
+}
+
+
 
   #map-canvas {
     width: 80%;
