@@ -7,7 +7,7 @@ var app = {};
     var player = {};
     player.cash = 0;
     player.inventory = [];
-
+	document.write(player.cash);
 	// 3 Types of Keylogger( Beginner, Medium, Hard)
 	// hitfactor and risk to be generate depending on type.
 	// Keylogger Begin
@@ -16,7 +16,7 @@ var app = {};
 	Easy.price = 100; 
 	Easy.risk = 0.2; 
 	Easy.hitfactor = 0.4;
-	
+	document.write(player.cash);
 	// Keylogger Medium
 	var Medium ={};
 	Medium.type="Medium";
@@ -30,8 +30,9 @@ var app = {};
 	Hard.price = 400;
 	Hard.risk = 0.6;
 	Hard.hitfactor = 0.8;
-
+	document.write(player.cash);
 	//BlackM
+	
 	var blackm = {};
 	blackm.credentials=[];
 	blackm.creditcard=[];
@@ -41,16 +42,17 @@ var app = {};
 	blackm.keylogger.push(Begin);
 	blackm.keylogger.push(Medium);
 	blackm.keylogger.push(Hard);
-	
+	document.write(player.cash);
+		
 
-function getCash(
+function getCash(){
 	alert(player.cash);
 	return player.cash;
 }
 	
 // end duplicate
 /*
-app.prototype = function () {    
+app.prototype = function (){    
     
 	// Variables here
   var player = {};
