@@ -10,6 +10,7 @@ app.service('GameManager', function($interval) {
     dataA: 0,
     dataB: 0,
     dataC: 0,
+    bestKL: 0,
     inventory: [],
     marker: []
   };
@@ -37,6 +38,7 @@ app.service('GameManager', function($interval) {
     {
       name: 'TT130',
       type: 0,
+      quality: 1,
       price: 100,
       risk: 0.2,
       hitfactor: 0.1,
@@ -46,6 +48,7 @@ app.service('GameManager', function($interval) {
     {
       name: 'XH-5',
       type: 0,
+      quality: 2,
       price: 150,
       risk: 0.1,
       hitfactor: 0.1,
@@ -55,6 +58,7 @@ app.service('GameManager', function($interval) {
     {
       name: 'TT230',
       type: 0,
+      quality: 3,
       price: 200,
       risk: 0.4,
       hitfactor: 0.2,
@@ -64,6 +68,7 @@ app.service('GameManager', function($interval) {
     {
       name: 'XH-7',
       type: 0,
+      quality: 4,
       price: 350,
       risk: 0.4,
       hitfactor: 0.25,
@@ -73,16 +78,18 @@ app.service('GameManager', function($interval) {
     {
       name: 'TT330',
       type: 0,
+      quality: 5,
       price: 400,
       risk: 0.6,
       hitfactor: 0.4,
       expiryTime: 30
-    },
+    }
 
     // ------------ Analyzers -------------
-    {
+    /*{
       name: 'AZ9900',
       type: 1,
+      quality: 1,
       price: 100,
       dataA: 0.4,
       dataB: 0.1,
@@ -93,6 +100,7 @@ app.service('GameManager', function($interval) {
     {
       name: 'AZ8800',
       type: 1,
+      quality: 2,
       price: 180,
       dataA: 0.4,
       dataB: 0.15,
@@ -103,6 +111,7 @@ app.service('GameManager', function($interval) {
     {
       name: 'TM2230',
       type: 1,
+      quality: 3,
       price: 250,
       dataA: 0.5,
       dataB: 0.2,
@@ -113,6 +122,7 @@ app.service('GameManager', function($interval) {
     {
       name: 'SS8000',
       type: 1,
+      quality: 4,
       price: 600,
       dataA: 0.7,
       dataB: 0.35,
@@ -123,12 +133,13 @@ app.service('GameManager', function($interval) {
     {
       name: 'SS9999',
       type: 1,
+      quality: 5,
       price: 1500,
       dataA: 0.85,
       dataB: 0.4,
       dataC: 0.2,
       duration: 8
-    }
+    }*/
   ];
 
   this.updatetime = function () {
@@ -157,8 +168,13 @@ app.service('GameManager', function($interval) {
   this.buy = function (a){   //buy from BlackM
     if (player.cash >= blackm.onsale[a].price) {
       player.cash -= blackm.onsale[a].price;
+      for (var i = 0; i < player.inventory.length; i++) {
+        if (player.inventory[i].name === blackm.onsale[a].name) {
+          alert('You already have this item!');
+          return;
+        }
+      }
       player.inventory.push(blackm.onsale[a]);
-      return player;
     } else {
       alert('You do not have enough money!');
     }
@@ -171,35 +187,38 @@ app.service('GameManager', function($interval) {
       blackm.sellprice.dataB * player.dataB +
       blackm.sellprice.dataC * player.dataC
     );
+    player.ecData = 0;
+    player.dataA = 0;
+    player.dataB = 0;
+    player.dataC = 0;
   };
 
   this.infect = function (a) {
-    if(player.inventory.indexOf(a) != -1){
-      player.inventory.pop(a);
-      if(Math.random() > 0.5){   // success of infecting
-        alert("Infect Successful");
-        player.attentionLevel+=a.risk*100;
-        switch(a.level){
-          case 1:
-            player.marker.push(MarkerEasy);
-            break;
-          case 2:
-            player.marker.push(MarkerMedium);
-            break;
-          case 3:
-            player.marker.push(MarkerHard);
-            break;
-          default:
-            break;
-        }
-      }
-      else{
-        alert("Unsuccessful infect");
-      }
+    if(player.inventory.length !== -1) {
+      // TODO append a into marker array
     }
     else{
-      alert("Player does not have keylogger of this type");
+      alert('Player does not have keylogger!');
     }
-    return;
-  }
+  };
+
+  this.updateAtt = function (a) {
+    player.attentionLevel += player.inventory[a].risk * 100;
+  };
+
+  this.update = function () {
+    for (var i = 0; i < player.marker.length; i++){
+      player.marker[i].timer -= 1;
+      player.marker[i].duration -= 1;
+      if(player.marker[i].timer === 0) {
+        player.ecData += player.marker[i].generation;
+        player.marker[i].timer = 10;
+      }
+      if(player.marker[i].duration < 0){
+        player.marker.pop(player.marker[i]);
+      }
+    }
+  };
+
+  $interval(this.update, 1000);
 });
