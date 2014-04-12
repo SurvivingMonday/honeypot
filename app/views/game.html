@@ -5,7 +5,18 @@
   <div class="market">
     <div class="black_market_title">Black Market</div>
     <tabset>
-      <tab heading="Buy">Pellentesque habitant morbi tristique</tab>
+      <tab heading="Buy">
+        <table class="table table-hover">
+          <tr>
+            <th>Item</th>
+            <th>Price</th>
+          </tr>
+          <tr ng-repeat="item in blackMarket.onsale">
+            <td>{{item.name}}</td>
+            <td>${{item.price}}</td>
+          </tr>
+        </table>
+      </tab>
       <tab heading="Sell">
       
       <h3>Selling anything today?</h3>
