@@ -18,7 +18,7 @@ app.factory('maps', function() {
 
 
 app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
-	
+
 	var map;
 	var startPointAnnArbor = new maps.LatLng(42.2814, -83.7483);
 
@@ -147,7 +147,7 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 	};
 
 	initMap();
-	
+
 	return {
 		addClickListeners: addClickListeners,
 		putKeylogger: putKeylogger,
