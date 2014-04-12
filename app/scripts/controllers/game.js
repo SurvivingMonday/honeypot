@@ -20,6 +20,7 @@ angular.module('honeypotApp')
 
 
     	GameMapService.addClickListeners(function(event) {
+
         if($scope.player.inventory.length == 0) {
 
         } else {

@@ -24,8 +24,7 @@
         </table>
       </tab>
       <tab heading="Sell" id="sell">
-    
-      <h3 id="sellQuestion">Selling anything today?</h3>
+      <h3>Selling anything today?</h3>
     	<p>WARNING: You will lose all your inventory<p>
 		<a href="#" class="btn btn-larde btn-success"> Sell </a>
        <h4> Expected revenue: </h4>
@@ -40,9 +39,10 @@
         <th>Name</th>
         <th>Hit factor</th>
       </tr>
-      <tr ng-repeat="inventory in player.inventory">
+      <tr ng-repeat="inventory in player.inventory" ng-class="{highlight: inventory.selected}">
         <td>{{inventory.name}}</td>
         <td>{{inventory.hitfactor}}</td>
+        <td><button type="button" class="btn btn-default btn-sm" ng-click="selectInv($index)">Select</button></td>
       </tr>
         
       </tr>
