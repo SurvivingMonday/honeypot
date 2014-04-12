@@ -1,17 +1,10 @@
 'use strict';
 
 angular.module('honeypotApp')
-    .controller('GameCtrl', function ($scope, GameMapService) {
+    .controller('GameCtrl', function ($scope, GameManager, GameMapService) {
+    	$scope.player = GameManager.getPlayer();
+    	$scope.blackMarket = GameManager.getBlackM();
 
-		GameMapService.addClickListeners(function(event) {
-			GameMapService.putKeylogger(event.latLng, "title",
-				function(len, marker) {
-					console.log(len);
-					console.log(marker);
-				}, 
-				function(len, marker) {
-					console.log(len);
-					console.log(marker);
-				});
-		});
+    	$scope.notifyBuy = GameManager.buy;
+    	$scope.notifySell = GameManager.sell;
     });

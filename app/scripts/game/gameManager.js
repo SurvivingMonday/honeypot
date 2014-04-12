@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('honeypotGame', ['ngCookies'])
-    .service('GameManager', function($q, $cookieStore) {
+
+    app.service('GameManager', function() {
 
       // Player
       var player = {
@@ -127,7 +127,7 @@ angular.module('honeypotGame', ['ngCookies'])
 
       this.updatetime = function () {
         return (gametime = setInterval(1000));
-      }.();
+      }();
 
 
       // Public functions
