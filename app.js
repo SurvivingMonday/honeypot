@@ -1,11 +1,9 @@
 var app = {};
 
-
 // to test -> consule.log - button onclick call function
 // begin duplicate
 	// Variables here
-/*
-    var player = {};
+ /*   var player = {};
     player.cash = 0;
     player.inventory = [];
 	document.write(player.cash);
@@ -50,9 +48,19 @@ function getCash(){
 	alert(player.cash);
 	return player.cash;
 }
-	
+
+function getInventory(){
+	for (var i=0;i<player.inventory.length;i++)
+	{	 
+		alert(player.inventory[i].type + " " + player.inventory[i].name);
+	}
+	if(player.inventory.length==0)
+    alert("Player has not bought anything");
+	return;
+}
+*/	
 // end duplicate
-*/
+
 
 app.prototype = function (){    
     
@@ -113,20 +121,39 @@ app.prototype = function (){
 	//asset.credentials=0;
 		
  // Private functions
-	
+
   return {
       // Public functions
     getCash: function () {    //display cash
-          return player.cash;
-      },
+      return player.cash;
+    },
+    getAttention: function () {    //display cash
+      return player.attentionLevel;
+    },
     getInventory: function() {   //getInventory displays on screen
-      return
+      for (var i=0;i<player.inventory.length;i++){	 
+        alert(player.inventory[i].type + " " +player.inventory[i].name);
+      }
+      if(player.inventory.length==0){
+          alert("Player has not bought anything");
+      }
+      return;
     },
+    getProduce: function() {   //getProduce displays on screen 
+      alert(player.produce.credentials);
+      alert(player.produce.uncrypteddata);
+      alert(creditcard);
+      alert(identity);
+      return;
+    }, 
     getBlackM: function() { //getBlackM displays on screen
-      return
-    },
-    getRisk: function() { //getRisk displays on screen
-      return
+      for (var i=0;i<blackm.onsale.length;i++){	 
+        alert(blackm.onsale[i].type+ " " +blackm.onsale[i].name);
+      }
+      if(blackm.onsale.length==0){
+          alert("Market Close");
+      }
+      return;
     },
     buy: function(a){   //buy from BlackM
       if (player.cash >= a.price){
@@ -149,7 +176,6 @@ app.prototype = function (){
     }
 	}
 };
-
 
 //infect
 // decrements cash, increase risk, increase active keyloggers
