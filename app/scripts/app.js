@@ -1,11 +1,12 @@
 'use strict';
 
-angular
+var app = angular
   .module('honeypotApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
-    'ngRoute'
+    'ngRoute',
+    'ui.bootstrap'
   ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
