@@ -18,14 +18,18 @@ angular.module('honeypotApp')
     		$scope.player.inventory[idx].selected = true;
     	};
 
+
     	GameMapService.addClickListeners(function(event) {
+        if($scope.player.inventory.length == 0) {
 
-    		var temp = selectedIdx;
+        } else {
+          var temp = selectedIdx;
 
-    		if (Math.random() < 0.8) {
-    			GameMapService.putKeylogger(event.latLng, function(length, marker){
-					GameManager.infect(marker, temp, length);
-    			});
-    		}
+          if (Math.random() < 0.8) {
+            GameMapService.putKeylogger(event.latLng, function(length, marker){
+              GameManager.infect(marker, temp, length);
+            });
+          }
+        }
     	})
     });
