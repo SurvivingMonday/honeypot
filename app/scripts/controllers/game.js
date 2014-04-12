@@ -1,12 +1,6 @@
 'use strict';
 
 angular.module('honeypotApp')
-    .controller('GameCtrl', function (GameManager) {
-      this.game = GameManager;
+    .controller('GameCtrl', function (GameManager, GameMapService) {
 
-      this.newGame = function () {
-        this.game.newGame();
-      };
-
-      this.newGame();
     });
