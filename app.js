@@ -1,13 +1,12 @@
 var app = {};
 
-/*
+
 // to test -> consule.log - button onclick call function
 // begin duplicate
 	// Variables here
     var player = {};
     player.cash = 0;
     player.inventory = [];
-	document.write(player.cash);
 
 	// 3 Types of Keylogger( Beginner, Medium, Hard)
 	// hitfactor and risk to be generate depending on type.
@@ -31,7 +30,6 @@ var app = {};
 	Hard.price = 400;
 	Hard.risk = 0.6;
 	Hard.hitfactor = 0.8;
-document.write(Hard.type);
 
 	//BlackM
 	var blackm = {};
@@ -40,18 +38,18 @@ document.write(Hard.type);
 	blackm.unencrypteddata=[];
 	blackm.identity=[];
 	blackm.keylogger=[];
-/*	blackm.keylogger.push("keyloggerA": Begin);
-	blackm.keylogger.push("keyloggerB": Medium);
-	blackm.keylogger.push("keyloggerC": Hard);
-*/	
-/*
-function getCash(){
-	player.cash+=1;
+	blackm.keylogger.push(Begin);
+	blackm.keylogger.push(Medium);
+	blackm.keylogger.push(Hard);
+	
+
+function getCash(
+	alert(player.cash);
 	return player.cash;
 }
-*/	
+	
 // end duplicate
-
+/*
 app.prototype = function () {    
     
 	// Variables here
@@ -128,7 +126,7 @@ app.prototype = function () {
 		}	
 	}
 }
-
+*/
 
 //infect
 // decrements cash, increase risk, increase active keyloggers
