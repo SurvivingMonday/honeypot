@@ -79,7 +79,9 @@ var app = {};
   MarkerHard.generation=80; 
   MarkerHard.pub=1;
   
+  //utility functions
   gametime= setInterval(updateTime,1000);
+
   
 function getCash(){    //display cash
       alert("Player Cash:" + " " + player.cash);
@@ -225,14 +227,15 @@ function updateTime(){
 app.prototype = function (){    
     
 	// Variables here
+  var gametime;
   var player = {};
-  player.cash = 0;
+  player.cash = 1000;
   player.attentionLevel = 0;  // scale: 0-10
-  player.inventory = {};  
-  player.marker = {};
+  player.inventory = [];  
+  player.marker = [];
   player.produce = {};
   player.produce.credentials = 0;
-  player.produce.unencrypteddata = 0;
+  player.produce.crypteddata = 0;
   player.produce.creditcard = 0;
   player.produce.identity = 0;
 
@@ -269,33 +272,48 @@ app.prototype = function (){
     hitfactor: 0.8
   };
 
-	
 	//BlackM
-	var blackm = {};
-	blackm.onsale = {};
+	var blackm={};
+	blackm.onsale=[];
 	blackm.onsale.push(Easy);
 	blackm.onsale.push(Medium);
 	blackm.onsale.push(Hard);
-  
+
   //Marker
-  var Marker = {};
-  Marker.type;
-  Marker.duration; // scale 0-100
-  Marker.generation; // scale 40-80
-  Marker.timer;   // if timer == 0;
+  var MarkerEasy= {};
+  MarkerEasy.type=Easy.level;
+  MarkerEasy.timer=10
+  MarkerEasy.duration= 30;
+  MarkerEasy.generation= 40; 
+  MarkerEasy.pub=1; // 1 == public area to generate, 0 private area
+
+  var MarkerMedium= {};
+  MarkerMedium.type=Medium.level;
+  MarkerMedium.timer=10
+  MarkerMedium.duration= 60;
+  MarkerMedium.generation= 60; 
+  MarkerMedium.pub=1;
   
-	//var asset ={}; // Assets Uncrypted data(credentials,uncrypted data)	
-	//asset.uncrypteddata=0;
-	//asset.credentials=0;
+  var MarkerHard= {};
+  MarkerHard.type=Hard.level;
+  MarkerHard.timer=10;
+  MarkerHard.duration= 90;
+  MarkerHard.generation=80; 
+  MarkerHard.pub=1;
+  
+  gametime= setInterval(updateTime,1000);
+
 		
  // Private functions
 
   return {
       // Public functions
     getCash: function () {    //display cash
+      alert("Player Cash:" + " " + player.cash);
       return player.cash;
     },
     getAttention: function () {    //display cash
+      alert(player.attentionLevel);
       return player.attentionLevel;
     },
     getInventory: function() {   //getInventory displays on screen
