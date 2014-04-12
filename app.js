@@ -1,57 +1,5 @@
 var app = {};
 
-
-// to test -> consule.log - button onclick call function
-// begin duplicate
-	// Variables here
-    var player = {};
-    player.cash = 0;
-    player.inventory = [];
-	document.write(player.cash);
-	// 3 Types of Keylogger( Beginner, Medium, Hard)
-	// hitfactor and risk to be generate depending on type.
-	// Keylogger Begin
-	var Easy = {};
-	Easy.type="Easy";
-	Easy.price = 100; 
-	Easy.risk = 0.2; 
-	Easy.hitfactor = 0.4;
-	document.write(player.cash);
-	// Keylogger Medium
-	var Medium ={};
-	Medium.type="Medium";
-	Medium.price = 200;
-	Medium.risk = 0.4;
-	Medium.hitfactor = 0.6;
-	
-	// Keylogger Hard
-	var Hard ={};
-	Hard.type="Hard";
-	Hard.price = 400;
-	Hard.risk = 0.6;
-	Hard.hitfactor = 0.8;
-	document.write(player.cash);
-	//BlackM
-	
-	var blackm = {};
-	blackm.credentials=[];
-	blackm.creditcard=[];
-	blackm.unencrypteddata=[];
-	blackm.identity=[];
-	blackm.keylogger=[];
-	blackm.keylogger.push(Begin);
-	blackm.keylogger.push(Medium);
-	blackm.keylogger.push(Hard);
-	document.write(player.cash);
-		
-
-function getCash(){
-	alert(player.cash);
-	return player.cash;
-}
-	
-// end duplicate
-/*
 app.prototype = function (){    
     
 	// Variables here
@@ -107,34 +55,43 @@ app.prototype = function (){
         getCash: function () {    //display cash
             return player.cash;    
         },
-		getInventory: function() {   //getInventory displays on screen
-			return
-		},
-		getBlackM: function() { //getBlackM displays on screen
-			return
-		},
-		getRisk: function() { //getRisk displays on screen
-			return
-		},
-		buy: function(a){   //buy from BlackM
-			if(player.cash >= blackm.keylogger[a].price){
+        getInventory: function() {   //getInventory displays on screen
+            for (var i=0;i<player.inventory.length;i++)
+            { 	 
+              alert(player.inventory[i].type);
+            }
+            if(player.inventory.length==0)
+              alert("Player has not bought anything");
+            return;
+        },
+        getProduce: function() {   //getInventory displays on screen
+            return
+        },
+        getBlackM: function() { //getBlackM displays on screen
+            return
+        },
+        getRisk: function() { //getRisk displays on screen
+            return
+        },
+        buy: function(a){   //buy from BlackM
+          if(player.cash >= blackm.keylogger[a].price){
 						player.cash-=blackm.keylogger[a].price;
 						player.inventory.push(a:blackm.keylogger[a]);
-			}
-			return;  
-		},
-    sell: function(){  // sell to BlackM
+          }
+          return;  
+        },
+        sell: function(){  // sell to BlackM
     
-      return (
-      blackm.sellprice.unencrypteddata * player.produce.unencrypteddata +
-      blackm.sellprice.credentials * player.produce.credentials +
-      blackm.sellprice.creditcard * player.produce.creditcard +
-      blackm.sellprice.identity * player.produce.identity
-      );
-    }
+        return (
+          blackm.sellprice.unencrypteddata * player.produce.unencrypteddata +
+          blackm.sellprice.credentials * player.produce.credentials +
+          blackm.sellprice.creditcard * player.produce.creditcard +
+          blackm.sellprice.identity * player.produce.identity
+          );
+        }
 	}
 }
-*/
+
 
 //infect
 // decrements cash, increase risk, increase active keyloggers
