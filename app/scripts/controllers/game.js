@@ -1,4 +1,4 @@
 'use strict';
 
 angular.module('honeypotApp')
-  .controller('MainCtrl', function () {});
+    .controller('GameCtrl', function () {});
