@@ -23,15 +23,15 @@
           </tr>
         </table>
       </tab>
-      <tab heading="Sell" id="sell">
-      <h3>Selling anything today?</h3>
-    	<p><font color="red">WARNING: You will lose all your inventory</font><p>
-		  <button type="button" class="btn btn-larde btn-success" ng-click="notifySell($index)">Sell</button>
-      </tab>
       <tab heading="Analyze" id="analyze">
-        <h3>I can help you encrypt data :D</h3>
-        <p>WARNING: You will lose your encrypted data</p>
-        <button type="button" class="btn btn-larde btn-success" ng-click="notifyAnalyze($index)">Analyze</button>
+        <h3>I can help you decrypt data :D</h3>
+        <p><font color="red">WARNING: You will lose your encrypted data</font></p>
+        <button type="button" class="btn btn-larde btn-success" ng-click="notifyAnalyze($index)">Decrypt</button>
+      </tab>
+      <tab heading="Sell" id="sell">
+        <h3>Selling anything today?</h3>
+    	  <p><font color="red">WARNING: You will lose all your inventory</font><p>
+		    <button type="button" class="btn btn-larde btn-success" ng-click="notifySell($index)">Sell</button>
       </tab>
     </tabset>
   </div>
@@ -53,6 +53,7 @@
     </table>
   </div>
 </div>
+
 
 <div id="game-notify" ng-show="showMessage">
   <div>{{notifyMessage}}</div>

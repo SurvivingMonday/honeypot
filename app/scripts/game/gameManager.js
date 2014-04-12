@@ -5,13 +5,14 @@ app.service('GameManager', function($interval, GameMapService) {
   // Player
   var player = {
     cash: 10000,
-    attentionLevel: 0, // 0 - 10
+    attentionLevel: 98, // 0 - 100
     ecData: 10,
     ecDataTemp: 10,
     dataA: 10,
     dataB: 10,
     dataC: 10,
     points: 0,
+    gameover: false,
     inventory: [],
     marker: []
   };
@@ -221,7 +222,7 @@ app.service('GameManager', function($interval, GameMapService) {
 
     player.marker.push(a);
     player.cash -= player.inventory[b].installationCost;
-    player.attentionLevel += player.inventory[b].risk * 10;
+    player.attentionLevel += player.inventory[b].risk * 40;
     player.points += c * 100;
   };
 
@@ -234,6 +235,10 @@ app.service('GameManager', function($interval, GameMapService) {
   };
 
   this.update = function () {
+    if (player.attentionLevel === 100) {
+      player.gameover = true;
+      this.gameover();
+    }
     for (var i = 0; i < player.marker.length; i++){
       player.marker[i].duration -= 1;
       if (player.marker[i].countdown >= 0) {
@@ -257,6 +262,10 @@ app.service('GameManager', function($interval, GameMapService) {
         player.marker.splice(i, 1);
       }
     }
+  };
+
+  this.gameover = function () {
+
   };
 
   $interval(this.update, 1000);
