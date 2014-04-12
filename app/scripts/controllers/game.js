@@ -1,35 +1,52 @@
 'use strict';
 
 angular.module('honeypotApp')
-    .controller('GameCtrl', function ($scope, GameManager, GameMapService) {
 
-    	var selectedIdx = null;
-    	$scope.player = GameManager.getPlayer();
-    	$scope.blackMarket = GameManager.getBlackM();
+.controller('GameCtrl', function ($scope, $timeout, GameManager, GameMapService) {
 
-    	$scope.notifyBuy = GameManager.buy;
-    	$scope.notifySell = GameManager.sell;
-    	
-    	$scope.selectInv = function(idx) {
-    		if (selectedIdx !== null) {
-    			$scope.player.inventory[selectedIdx].selected = false;
-    		}
-    		selectedIdx = idx;
-    		$scope.player.inventory[idx].selected = true;
-    	};
+	var selectedIdx = null;
+	var errorNotify = function(str) {
+		$scope.notifyMessage = str;
+		$scope.showMessage = true;
+		$timeout(function() {
+			$scope.showMessage = false;
+			$scope.notifyMessage = '';
+		}, 3000);
+	};
 
-    	GameMapService.addClickListeners(function(event) {
+	GameManager.onAlert(errorNotify);
 
-        if($scope.player.inventory.length == 0) {
+	$scope.player = GameManager.getPlayer();
+	$scope.blackMarket = GameManager.getBlackM();
 
-        } else {
-          var temp = selectedIdx;
-          console.log(temp);
-          if (Math.random() < 0.8) { 
-            GameMapService.putKeylogger(event.latLng, function(length, marker) {
-              GameManager.infect(marker, temp, length);
-            });
-          }
-        }
-	})
+	$scope.notifyBuy = GameManager.buy;
+	$scope.notifySell = GameManager.sell;
+	
+	$scope.selectInv = function(idx) {
+		if (selectedIdx !== null) {
+			$scope.player.inventory[selectedIdx].selected = false;
+		}
+		selectedIdx = idx;
+		$scope.player.inventory[idx].selected = true;
+	};
+
+
+	GameMapService.addClickListeners(function(event) {
+
+		if($scope.player.inventory.length === 0) {
+			errorNotify('You do not have inventory!');
+		} 
+		else if (selectedIdx === null) {
+			errorNotify('You did not select a key logger.');
+		}
+		else {
+			var temp = selectedIdx;
+
+			if (Math.random() < 0.8) {
+				GameMapService.putKeylogger(event.latLng, function(length, marker){
+					GameManager.infect(marker, temp, length);
+				});
+			}
+		}
+	});
 });
