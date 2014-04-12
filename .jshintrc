@@ -21,6 +21,7 @@
   "globals": {
     "angular": false,
     "app": false,
-    "google": true
+    "google": true,
+    "$": true
   }
 }
