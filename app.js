@@ -89,10 +89,10 @@ app.prototype = function () {
 	
 	//BlackM
 	var blackm = {};
-	blackm.keylogger=[];
-	blackm.keylogger.push(Begin);
-	blackm.keylogger.push(Medium);
-	blackm.keylogger.push(Hard);
+	blackm.onsale = {};
+	blackm.onsale.push(Begin);
+	blackm.onsale.push(Medium);
+	blackm.onsale.push(Hard);
 
 	//var asset ={}; // Assets Uncrypted data(credentials,uncrypted data)	
 	//asset.uncrypteddata=0;
@@ -115,14 +115,19 @@ app.prototype = function () {
 			return
 		},
 		buy: function(a){   //buy from BlackM
-			if(player.cash >= blackm.keylogger[a].price){
-						player.cash-=blackm.keylogger[a].price;
-						player.inventory.push(a:blackm.keylogger[a]);
-			}
-			return;  
+
+			return (
+        if(player.cash >= a.price){
+          player.cash -= a.price;
+          player.inventory.push(a);
+          blackm.onsale.delete(a);
+        } else {
+          alert("You do not have enough money!");
+        }
+			);
 		},
     sell: function(){  // sell to BlackM
-    
+
       return (
       blackm.sellprice.unencrypteddata * player.produce.unencrypteddata +
       blackm.sellprice.credentials * player.produce.credentials +
