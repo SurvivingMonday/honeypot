@@ -229,9 +229,8 @@ app.service('GameManager', function($interval, GameMapService) {
         player.ecData += player.inventory[player.marker[i].index].hitfactor;
       }
       if(player.marker[i].duration === 5) {
-        console.log('h');
+
         GameMapService.brokenKeyLogger(player.marker[i]);
-        console.log('g');
       }
       if(player.marker[i].duration < 0){
         var temp = player.marker.pop(player.marker[i]);
