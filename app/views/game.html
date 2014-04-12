@@ -1,49 +1,12 @@
-<div class="row">
-  <div class="col-md-2">
-    <div class="well">
-      <h3>Name </h3>
-      <h3>GTA</h3>
-    </div>
-  </div>
-  <div class="col-md-7">
-    <div class="well" align="center">
-      <h1>Honey Pot</h1>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="well" align="center">
-      <a href="/tutorial" class="btn btn-larde btn-warning"> Tutorial </a>
-      <a href="/start" class="btn btn-larde btn-danger"> Log Out </a>
-    </div>
-  </div>
+<div ng-include="'/views/navigation.html'"></div>
+
+<div class="game_content">
+  <div id="map-canvas"></div>
+  <div class="market">
+  <h3 align="center">Black Market</h3>
+  <tabset>
+    <tab heading="Buy">Pellentesque habitant morbi tristique</tab>
+    <tab heading="Sell">habitant morbi tristique </tab>
+  </tabset>
 </div>
-
-
-
-<div class="row">
-  <div class="col-md-2">
-    <div class="well">
-      <h3 align="center">Cash</h3>
-      <h3 align="center" >Inventory <button class="btn btn-primary collapsed" data-toggle="collapse" data-target="#intro2"></button></h3>
-      <div id="intro2" class="collapse">
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-          when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-7">
-    <div class="well" id="map-canvas">
-      
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="well">
-      <h3 align="center">Black Market</h3>
-        <tabset>
-          <tab heading="Buy">Pellentesque habitant morbi tristique</tab>
-          <tab heading="Sell">habitant morbi tristique </tab>
-        </tabset>
-    </div>
-  </div>
 </div>
