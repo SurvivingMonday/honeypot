@@ -21,15 +21,21 @@ angular.module('honeypotApp')
 
     	GameMapService.addClickListeners(function(event) {
 
-        if($scope.player.inventory.length == 0) {
+        if($scope.player.inventory.length === 0) {
 
         } else {
           var temp = selectedIdx;
-          console.log(temp);
-          if (Math.random() < 0.8) {
-            GameMapService.putKeylogger(event.latLng, function(length, marker){
+          if (Math.random() < 0.8 && temp !== null) {
+            GameMapService.putKeylogger(event.latLng, function(length, marker) {
+              console.log(length);
+              console.log(marker);
               GameManager.infect(marker, temp, length);
+              console.log(asdfa);
+              $scope.player = GameManager.getPlayer();
             });
+          } else {
+            // TODO: Google tag here 'Select a keylogger first'
+
           }
         }
     	})
