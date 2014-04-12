@@ -55,9 +55,16 @@ function getCash(){
 app.prototype = function () {    
     
 	// Variables here
-    var player = {};
-    player.cash = 0;
-    player.inventory = [];
+  var player = {};
+  player.cash = 0;
+  player.inventory = [];
+  player.produce = {};
+  player.produce.credentials = 0;
+  player.produce.unencrypteddata = 0;
+  player.produce.creditcard = 0;
+  player.produce.identity = 0;
+
+
 	
 	// 3 Types of Keylogger( Beginner, Medium, Hard)
 	// hitfactor and risk to be generate depending on type.
@@ -84,14 +91,10 @@ app.prototype = function () {
 	
 	//BlackM
 	var blackm = {};
-	blackm.credentials=[];
-	blackm.creditcard=[];
-	blackm.unencrypteddata=[];
-	blackm.identity=[];
 	blackm.keylogger=[];
-	blackm.keylogger.push("keyloggerA": Begin);
-	blackm.keylogger.push("keyloggerB": Medium);
-	blackm.keylogger.push("keyloggerC": Hard);
+	blackm.keylogger.push(Begin);
+	blackm.keylogger.push(Medium);
+	blackm.keylogger.push(Hard);
 
 	//var asset ={}; // Assets Uncrypted data(credentials,uncrypted data)	
 	//asset.uncrypteddata=0;
