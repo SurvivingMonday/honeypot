@@ -24,6 +24,13 @@ app.service('GameManager', function() {
 
   // Black Market
   var blackm = {};
+  blackm.sellprice = {
+    ecData: 4,
+    dataA: 8,
+    dataB: 15,
+    dataC: 25
+  };
+
   blackm.onsale = [
     // Type => 0: Keylogger, 1: Analyzer
     // ------------ Keyloggers ------------
@@ -125,8 +132,8 @@ app.service('GameManager', function() {
   ];
 
   this.updatetime = function () {
-    return (gametime = setInterval(1000));
-  }.();
+    gametime = setInterval(1000);
+  };
 
 
   // Public functions
@@ -151,21 +158,48 @@ app.service('GameManager', function() {
     if (player.cash >= blackm.onsale[a].price) {
       player.cash -= blackm.onsale[a].price;
       player.inventory.push(blackm.onsale[a]);
-      cashCallback(player.cash);
-      //blackm.onsale.delete(a);
-      return;
+      return player;
     } else {
-      alert("You do not have enough money!");
-      return;
+      alert('You do not have enough money!');
     }
   };
 
-  this.sell = function(a) {
-    return (
-      blackm.sellprice.unencrypteddata * player.produce.unencrypteddata +
-      blackm.sellprice.credentials * player.produce.credentials +
-      blackm.sellprice.creditcard * player.produce.creditcard +
-      blackm.sellprice.identity * player.produce.identity
+  this.sell = function() {
+    player.cash += (
+      blackm.sellprice.ecData * player.ecData +
+      blackm.sellprice.dataA * player.dataA +
+      blackm.sellprice.dataB * player.dataB +
+      blackm.sellprice.dataC * player.dataC
     );
+  };
+
+  this.infect = function (a) {
+    if(player.inventory.indexOf(a) != -1){
+      player.inventory.pop(a);
+      if(Math.random() > 0.5){   // success of infecting
+        alert("Infect Successful");
+        player.attentionLevel+=a.risk*100;
+        switch(a.level){
+          case 1:
+            player.marker.push(MarkerEasy);
+            break;
+          case 2:
+            player.marker.push(MarkerMedium);
+            break;
+          case 3:
+            player.marker.push(MarkerHard);
+            break;
+          default:
+            break;
+        }
+      }
+      else{
+        alert("Unsuccessful infect");
+      }
+    }
+    else{
+      alert("Player does not have keylogger of this type");
+    }
+    return;
   }
 });
