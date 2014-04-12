@@ -16,7 +16,6 @@ app.factory('maps', function() {
 	return google.maps;
 });
 
-
 app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 
 	var map;
