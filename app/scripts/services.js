@@ -55,8 +55,8 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
 		var styledMap = new google.maps.StyledMapType(styles,
 		{
 			name: 'Styled Map',
-			minZoom: 11,
-			maxZoom: 15
+			minZoom: 3,
+			maxZoom: 16
 		});
 
 		// Set the map options.
