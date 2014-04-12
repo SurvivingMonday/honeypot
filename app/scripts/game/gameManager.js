@@ -6,11 +6,11 @@ app.service('GameManager', function($interval) {
   var player = {
     cash: 200,
     attentionLevel: 0, // 0 - 10
-    ecData: 10,
-    dataA: 10,
-    dataB: 10,
-    dataC: 10,
-    bestKL: 0,
+    ecData: 0,
+    dataA: 0,
+    dataB: 0,
+    dataC: 0,
+    points: 0,
     inventory: [],
     marker: []
   };
@@ -42,7 +42,8 @@ app.service('GameManager', function($interval) {
       price: 100,
       risk: 0.2,
       hitfactor: 0.1,
-      expiryTime: 0
+      expiryTime: 0,
+      installationCost: 10
     },
 
     {
@@ -52,7 +53,8 @@ app.service('GameManager', function($interval) {
       price: 150,
       risk: 0.1,
       hitfactor: 0.1,
-      expiryTime: 0
+      expiryTime: 0,
+      installationCost: 12
     },
 
     {
@@ -62,7 +64,8 @@ app.service('GameManager', function($interval) {
       price: 200,
       risk: 0.4,
       hitfactor: 0.2,
-      expiryTime: 15
+      expiryTime: 15,
+      installationCost: 16
     },
 
     {
@@ -72,7 +75,8 @@ app.service('GameManager', function($interval) {
       price: 350,
       risk: 0.4,
       hitfactor: 0.25,
-      expiryTime: 15
+      expiryTime: 15,
+      installationCost: 19
     },
 
     {
@@ -82,7 +86,8 @@ app.service('GameManager', function($interval) {
       price: 400,
       risk: 0.6,
       hitfactor: 0.4,
-      expiryTime: 30
+      expiryTime: 30,
+      installationCost: 25
     }
 
     // ------------ Analyzers -------------
@@ -165,18 +170,24 @@ app.service('GameManager', function($interval) {
     return blackm;
   };
 
+  var AlertCallBack = angular.noop;
+
+  this.onAlert = function (callback) {
+    AlertCallBack = callback;
+  };
+
   this.buy = function (a){   //buy from BlackM
     if (player.cash >= blackm.onsale[a].price) {
       player.cash -= blackm.onsale[a].price;
       for (var i = 0; i < player.inventory.length; i++) {
         if (player.inventory[i].name === blackm.onsale[a].name) {
-          alert('You already have this item!');
+          AlertCallBack('You already have this item!');
           return;
         }
       }
       player.inventory.push(blackm.onsale[a]);
     } else {
-      alert('You do not have enough money!');
+      AlertCallBack('You do not have enough money!');
     }
   };
 
@@ -193,17 +204,16 @@ app.service('GameManager', function($interval) {
     player.dataC = 0;
   };
 
-  this.infect = function (a) {
+  this.infect = function (a, b, c) {
     if(player.inventory.length !== -1) {
       // TODO append a into marker array
+      player.cash -= player.inventory[b].installationCost;
+      player.attentionLevel += player.inventory[b].risk * 100;
+      player.points += c * 100;
     }
     else{
-      alert('Player does not have keylogger!');
+      AlertCallBack('Player does not have keylogger!');
     }
-  };
-
-  this.updateAtt = function (a) {
-    player.attentionLevel += player.inventory[a].risk * 100;
   };
 
   this.update = function () {
