@@ -1,6 +1,6 @@
 'use strict';
 
-app.service('GameManager', function($interval) {
+app.service('GameManager', function($interval, GameMapService) {
 
   // Player
   var player = {
@@ -229,10 +229,13 @@ app.service('GameManager', function($interval) {
         player.ecData += player.inventory[player.marker[i].index].hitfactor;
       }
       if(player.marker[i].duration === 5) {
-        player.marker[i].brokenKeyLogger(marker[i]);
+        console.log('h');
+        GameMapService.brokenKeyLogger(player.marker[i]);
+        console.log('g');
       }
       if(player.marker[i].duration < 0){
-        player.marker.pop(player.marker[i]);
+        var temp = player.marker.pop(player.marker[i]);
+        temp.setMap(null);
       }
     }
   };
