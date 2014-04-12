@@ -137,9 +137,11 @@
 
           map: map,
           position: place.geometry.location,
+          
+          // Animation for the markers.
           animation: google.maps.Animation.BOUNCE,
           icon: image
-          
+
         });
 
         google.maps.event.addListener(marker, 'mouseover', function() {

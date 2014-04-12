@@ -67,8 +67,9 @@ app.prototype = function (){
 	// Variables here
   var player = {};
   player.cash = 0;
-  player.attentionLevel = 0;
-  player.inventory = {};
+  player.attentionLevel = 0;  // scale: 0-10
+  player.inventory = {};  
+  player.marker = {};
   player.produce = {};
   player.produce.credentials = 0;
   player.produce.unencrypteddata = 0;
@@ -81,7 +82,7 @@ app.prototype = function (){
 	var Easy = {
     name: "TT130",
     type: "Keylogger",
-    level: 0,
+    level: 1,
     price: 100,
     risk: 0.2,
     hitfactor: 0.4
@@ -91,7 +92,7 @@ app.prototype = function (){
 	var Medium = {
     name: "TT230",
     type: "Keylogger",
-    level: 1,
+    level: 2,
     price: 200,
     risk: 0.4,
     hitfactor: 0.6
@@ -102,7 +103,7 @@ app.prototype = function (){
 	var Hard = {
     name: "TT330",
     type: "Keylogger",
-    level: 2,
+    level: 3,
     price: 400,
     risk: 0.6,
     hitfactor: 0.8
@@ -115,7 +116,14 @@ app.prototype = function (){
 	blackm.onsale.push(Begin);
 	blackm.onsale.push(Medium);
 	blackm.onsale.push(Hard);
-
+  
+  //Marker
+  var Marker = {};
+  Marker.type;
+  Marker.duration; // scale 0-100
+  Marker.generation; // scale 40-80
+  Marker.timer;   // if timer == 0;
+  
 	//var asset ={}; // Assets Uncrypted data(credentials,uncrypted data)	
 	//asset.uncrypteddata=0;
 	//asset.credentials=0;
@@ -173,6 +181,33 @@ app.prototype = function (){
       blackm.sellprice.creditcard * player.produce.creditcard +
       blackm.sellprice.identity * player.produce.identity
       );
+    },
+    infect: function(a){
+      player.inventory.delete(a);
+      if(Math.random()> 0.5){   // success of infecting
+        var b = new Marker;  // needs to be dynamic
+        b.type = a.level;
+        b.duration = Math.floor((Math.random()*100))%(30*b.type); // better type has higher duration
+        b.generation = Math.floor(100*a.hitrate);
+        player.attentionLevel+= a.risk;
+        player.marker.push(b);
+      }
+      return;
+    }
+    updateTime: function(){
+      for (var i=0;i<player.marker.length;i++){	 
+        player.marker[i].timer-=1;
+        player.marker[i].duration-=1;
+        if(player.marker[i].timer==0){
+          player.cash+=player.marker[i].generate;
+          player.marker[i].timer=10;
+        }
+        if(player.marker[i].duration<0){
+          player.marker.delete(player.marker[i]);
+          i--;
+        }
+      }
+      return;
     }
 	}
 };
