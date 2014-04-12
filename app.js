@@ -66,7 +66,13 @@ app.prototype = function (){
           return player.cash;
       },
     getInventory: function() {   //getInventory displays on screen
-      return
+      for (var i=0;i<player.inventory.length;i++)
+      {	 
+        alert(player.inventory[i].type + " " +player.inventory[i].name);
+      }
+      if(player.inventory.length==0)
+          alert("Player has not bought anything");
+      return;
     },
     getBlackM: function() { //getBlackM displays on screen
       return
