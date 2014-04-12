@@ -21,6 +21,9 @@
       <p class="navbar-text">Data C: {{player.dataC}}</p>
       <p class="navbar-text">ATT: {{player.attentionLevel}}</p>
       </ul>
+      <div class="col-sm-2">
+        <progressbar max="max" value="player.attentionLevel"><span style="color:black; white-space:nowrap;">{{player.attentionLevel}} / {{max}}</span></progressbar>
+      </div>
       <ul class="nav navbar-nav navbar-right">
         <p class="navbar-text">Signed in as HackerSS</p>
         <li><a href="">Tutorial</a></li>
