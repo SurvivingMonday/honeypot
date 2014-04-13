@@ -8,7 +8,7 @@ var app = angular
     'ngRoute',
     'ui.bootstrap'
   ])
-  .config(function ($routeProvider, $locationProvider) {
+  .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -29,5 +29,4 @@ var app = angular
       .otherwise({
         redirectTo: '/'
       });
-    $locationProvider.html5Mode(true);
   });

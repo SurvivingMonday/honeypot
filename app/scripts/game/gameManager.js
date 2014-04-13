@@ -149,13 +149,13 @@ app.service('GameManager', function($interval, GameMapService) {
     }*/
   ];
 
-  this.updatetime = function () {
+  this.updatetime = function() {
     gametime = setInterval(1000);
   };
 
 
   // Public functions
-  this.initGame = function () {
+  this.initGame = function() {
     player.cash = 210;
     player.attentionLevel = 0; // 0 - 100
     player.ecData = 0;
@@ -169,38 +169,38 @@ app.service('GameManager', function($interval, GameMapService) {
     player.marker = [];
   };
 
-  this.getPlayer = function () {
+  this.getPlayer = function() {
     return player;
   };
 
-  this.getBlackM = function () {
+  this.getBlackM = function() {
     return blackm;
   };
 
-  var AlertCallBack = angular.noop;
+  var alertCallBack = angular.noop;
 
-  this.onAlert = function (callback) {
-    AlertCallBack = callback;
+  this.onAlert = function(callback) {
+    alertCallBack = callback;
   };
 
-   var GameOverCallBack = angular.noop;
+  var GameOverCallBack = angular.noop;
 
-  this.onGameOver = function (callback) {
+  this.onGameOver = function(callback) {
     GameOverCallBack = callback;
   };
 
-  this.buy = function (a){   //buy from BlackM
+  this.buy = function(a) { //buy from BlackM
     if (player.cash >= blackm.onsale[a].price) {
       player.cash -= blackm.onsale[a].price;
       for (var i = 0; i < player.inventory.length; i++) {
         if (player.inventory[i].name === blackm.onsale[a].name) {
-          AlertCallBack('You already have this item!');
+          alertCallBack('You already have this item!');
           return;
         }
       }
       player.inventory.push(blackm.onsale[a]);
     } else {
-      AlertCallBack('You do not have enough money!');
+      alertCallBack('You do not have enough money!');
     }
   };
 
@@ -218,13 +218,13 @@ app.service('GameManager', function($interval, GameMapService) {
     player.dataC = 0;
   };
 
-  this.infect = function (a, b, c) {
+  this.infect = function(a, b, c) {
     a.countdown = Math.round(Math.random() + 1);
-    a.duration = player.inventory[b].expiryTime + Math.floor((Math.random()*30)+1);
+    a.duration = player.inventory[b].expiryTime + Math.floor((Math.random() * 30) + 1);
     a.timer = 0;
     a.gps = player.inventory[b].hitfactor;
     console.log(c);
-    if(c > 0) {
+    if (c > 0) {
       a.public = true;
       player.points = c * 100;
     } else {
@@ -237,7 +237,7 @@ app.service('GameManager', function($interval, GameMapService) {
     player.points += c * 100;
   };
 
-  this.analysis = function () {
+  this.analysis = function() {
     player.dataA += Math.round(0.6 * player.ecData);
     player.dataB += Math.round(0.3 * player.ecData);
     player.dataC += Math.round(0.1 * player.ecData);
@@ -252,35 +252,35 @@ app.service('GameManager', function($interval, GameMapService) {
   };
   */
 
-  this.update = function () {
+  this.update = function() {
     /*if (player.attentionLevel >= 100) {
       player.gameover = true;
       this.initGame();
       GameOverCallBack();
     } else {*/
-      for (var i = 0; i < player.marker.length; i++){
-        player.marker[i].duration -= 1;
-        if (player.marker[i].countdown >= 0) {
-          player.marker[i].countdown -= 1;
-          player.marker[i].timer = player.marker[i].duration;
-        } else if (player.marker[i].countdown === -1) {
-          GameMapService.animateMarker(player.marker[i]);
-          player.marker[i].timer -= 1;
-          if(player.marker[i].public === true) {
-            player.ecDataTemp += player.marker[i].gps;
-            player.ecData = Math.floor(player.ecDataTemp);
-          }
+    for (var i = 0; i < player.marker.length; i++) {
+      player.marker[i].duration -= 1;
+      if (player.marker[i].countdown >= 0) {
+        player.marker[i].countdown -= 1;
+        player.marker[i].timer = player.marker[i].duration;
+      } else if (player.marker[i].countdown === -1) {
+        GameMapService.animateMarker(player.marker[i]);
+        player.marker[i].timer -= 1;
+        if (player.marker[i].public === true) {
+          player.ecDataTemp += player.marker[i].gps;
+          player.ecData = Math.floor(player.ecDataTemp);
+        }
 
-        }
-        if(player.marker[i].duration === 5) {
-
-          GameMapService.brokenKeyLogger(player.marker[i]);
-        }
-        if(player.marker[i].duration < 0){
-          player.marker[i].setMap(null);
-          player.marker.splice(i, 1);
-        }
       }
+      if (player.marker[i].duration === 5) {
+
+        GameMapService.brokenKeyLogger(player.marker[i]);
+      }
+      if (player.marker[i].duration < 0) {
+        player.marker[i].setMap(null);
+        player.marker.splice(i, 1);
+      }
+    }
     //}
 
   };
