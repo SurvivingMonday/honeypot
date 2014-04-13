@@ -38,7 +38,7 @@ app.controller('GameCtrl', function ($scope, $timeout, GameManager, GameMapServi
 
 	$scope.notifyBuy = GameManager.buy;
 	$scope.notifySell = GameManager.sell;
-  	$scope.notifyAnalyze = GameManager.analysis;
+  $scope.notifyAnalyze = GameManager.analysis;
 	
 	$scope.selectInv = function(idx) {
 		if (selectedIdx !== null) {
@@ -69,7 +69,9 @@ app.controller('GameCtrl', function ($scope, $timeout, GameManager, GameMapServi
       }
     }
 	});
+});
 
+  /*
   $scope.items = ['item1', 'item2', 'item3'];
   $scope.open = function () {
 
@@ -99,6 +101,6 @@ app.controller('ModalDemoCtrl', function ($scope, $modal, $log) {
   $scope.items = ['item1', 'item2', 'item3'];
 
 });
-
+*/
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
