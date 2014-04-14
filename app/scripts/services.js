@@ -115,8 +115,12 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
   };
 
   // This should be called when keylogger successfully takes in data.
-  var animateMarker = function(marker) {
+  var animateMarkerBounce = function(marker) {
     marker.setAnimation(google.maps.Animation.BOUNCE);
+  };
+
+  var animateMarkerStop = function(marker) {
+    marker.setAnimation(null);
   };
 
   // Called when key logger is broken.
@@ -141,7 +145,8 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
     init: initMap,
     addClickListeners: addClickListeners,
     putKeylogger: putKeylogger,
-    animateMarker: animateMarker,
+    animateMarkerBounce: animateMarkerBounce,
+    animateMarkerStop: animateMarkerStop,
     brokenKeyLogger: brokenKeyLogger
   };
 });

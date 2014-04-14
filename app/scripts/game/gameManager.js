@@ -223,6 +223,8 @@ app.service('GameManager', function($interval, GameMapService) {
     a.duration = player.inventory[b].expiryTime + Math.floor((Math.random() * 30) + 1);
     a.timer = 0;
     a.gps = player.inventory[b].hitfactor;
+    a.producing = false; // false -> not producing, true -> producing
+    a.lastbreath = false;
     console.log(c);
     if (c > 0) {
       a.public = true;
@@ -264,17 +266,23 @@ app.service('GameManager', function($interval, GameMapService) {
         player.marker[i].countdown -= 1;
         player.marker[i].timer = player.marker[i].duration;
       } else if (player.marker[i].countdown === -1) {
-        GameMapService.animateMarker(player.marker[i]);
+
         player.marker[i].timer -= 1;
-        if (player.marker[i].public === true) {
+        if (player.marker[i].producing === true) {
+          GameMapService.animateMarkerBounce(player.marker[i]);
           player.ecDataTemp += player.marker[i].gps;
           player.ecData = Math.floor(player.ecDataTemp);
-        }
+        } else if (player.marker[i].public === true && player.marker[i].producing === false && player.marker[i].lastbreath === false) {
+          player.marker[i].producing = true;
 
+        }
       }
       if (player.marker[i].duration === 5) {
-
         GameMapService.brokenKeyLogger(player.marker[i]);
+      } else if (player.marker[i].duration === 1 && player.marker[i].lastbreath === false) {
+        GameMapService.animateMarkerStop(player.marker[i]);
+        player.marker[i].producing = 0;
+        player.marker[i].lastbreath = false;
       }
       if (player.marker[i].duration < 0) {
         player.marker[i].setMap(null);
