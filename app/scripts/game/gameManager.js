@@ -219,23 +219,27 @@ app.service('GameManager', function($interval, GameMapService) {
   };
 
   this.infect = function (a, b, c) {
-    a.countdown = Math.round(Math.random() + 1);
-    a.duration = player.inventory[b].expiryTime + Math.floor((Math.random() * 30) + 1);
-    a.timer = 0;
-    a.gps = player.inventory[b].hitfactor;
-    a.producing = false; // false -> not producing, true -> producing
-    a.lastbreath = false;
-    if (c > 0) {
-      a.public = true;
-      player.points = c * 100;
-    } else {
-      a.public = false;
-    }
+    if (player.cash >= player.inventory[b].installationCost) {
+      a.countdown = Math.round(Math.random() + 1);
+      a.duration = player.inventory[b].expiryTime + Math.floor((Math.random() * 30) + 1);
+      a.timer = 0;
+      a.gps = player.inventory[b].hitfactor;
+      a.producing = false; // false -> not producing, true -> producing
+      a.lastbreath = false;
+      if (c > 0) {
+        a.public = true;
+        player.points = c * 100;
+      } else {
+        a.public = false;
+      }
 
-    player.marker.push(a);
-    player.cash -= player.inventory[b].installationCost;
-    player.attentionLevel += player.inventory[b].risk * 20;
-    player.points += c * 100;
+      player.marker.push(a);
+      player.cash -= player.inventory[b].installationCost;
+      player.attentionLevel += player.inventory[b].risk * 20;
+      player.points += c * 100;
+    } else {
+      alertCallBack('You don\'t have enough money!');
+    }
   };
 
   this.analysis = function () {
