@@ -183,10 +183,10 @@ app.service('GameManager', function($interval, GameMapService) {
     alertCallBack = callback;
   };
 
-  var GameOverCallBack = angular.noop;
+  var gameOverCallBack = angular.noop;
 
   this.onGameOver = function (callback) {
-    GameOverCallBack = callback;
+    gameOverCallBack = callback;
   };
 
   this.buy = function (a) { //buy from BlackM
@@ -225,7 +225,6 @@ app.service('GameManager', function($interval, GameMapService) {
     a.gps = player.inventory[b].hitfactor;
     a.producing = false; // false -> not producing, true -> producing
     a.lastbreath = false;
-    console.log(c);
     if (c > 0) {
       a.public = true;
       player.points = c * 100;
@@ -250,14 +249,14 @@ app.service('GameManager', function($interval, GameMapService) {
 
   var gameover = function () {
     this.initGame();
-    GameOverCallBack();
+    gameOverCallBack();
   };
 
   this.update = function () {
     if (player.attentionLevel >= 1000) {
       player.gameover = true;
       this.initGame();
-      GameOverCallBack();
+      gameOverCallBack();
     } else {
       for (var i = 0; i < player.marker.length; i++) {
         player.marker[i].duration -= 1;
@@ -288,10 +287,7 @@ app.service('GameManager', function($interval, GameMapService) {
           player.marker.splice(i, 1);
         }
       }
-      //}
-
     }
-    ;
     $interval(this.update, 1000);
-  }
+  };
 });
