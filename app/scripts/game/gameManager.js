@@ -94,68 +94,68 @@ app.service('GameManager', function($interval, GameMapService) {
 
     // ------------ Analyzers -------------
     /*{
-      name: 'AZ9900',
-      type: 1,
-      quality: 1,
-      price: 100,
-      dataA: 0.4,
-      dataB: 0.1,
-      dataC: 0.01,
-      duration: 6
-    },
+     name: 'AZ9900',
+     type: 1,
+     quality: 1,
+     price: 100,
+     dataA: 0.4,
+     dataB: 0.1,
+     dataC: 0.01,
+     duration: 6
+     },
 
-    {
-      name: 'AZ8800',
-      type: 1,
-      quality: 2,
-      price: 180,
-      dataA: 0.4,
-      dataB: 0.15,
-      dataC: 0.05,
-      duration: 7
-    },
+     {
+     name: 'AZ8800',
+     type: 1,
+     quality: 2,
+     price: 180,
+     dataA: 0.4,
+     dataB: 0.15,
+     dataC: 0.05,
+     duration: 7
+     },
 
-    {
-      name: 'TM2230',
-      type: 1,
-      quality: 3,
-      price: 250,
-      dataA: 0.5,
-      dataB: 0.2,
-      dataC: 0.05,
-      duration: 5
-    },
+     {
+     name: 'TM2230',
+     type: 1,
+     quality: 3,
+     price: 250,
+     dataA: 0.5,
+     dataB: 0.2,
+     dataC: 0.05,
+     duration: 5
+     },
 
-    {
-      name: 'SS8000',
-      type: 1,
-      quality: 4,
-      price: 600,
-      dataA: 0.7,
-      dataB: 0.35,
-      dataC: 0.15,
-      duration: 7
-    },
+     {
+     name: 'SS8000',
+     type: 1,
+     quality: 4,
+     price: 600,
+     dataA: 0.7,
+     dataB: 0.35,
+     dataC: 0.15,
+     duration: 7
+     },
 
-    {
-      name: 'SS9999',
-      type: 1,
-      quality: 5,
-      price: 1500,
-      dataA: 0.85,
-      dataB: 0.4,
-      dataC: 0.2,
-      duration: 8
-    }*/
+     {
+     name: 'SS9999',
+     type: 1,
+     quality: 5,
+     price: 1500,
+     dataA: 0.85,
+     dataB: 0.4,
+     dataC: 0.2,
+     duration: 8
+     }*/
   ];
 
-  this.updatetime = function() {
+  this.updatetime = function () {
     gametime = setInterval(1000);
   };
 
 
   // Public functions
-  this.initGame = function() {
+  this.initGame = function () {
     player.cash = 210;
     player.attentionLevel = 0; // 0 - 100
     player.ecData = 0;
@@ -169,27 +169,27 @@ app.service('GameManager', function($interval, GameMapService) {
     player.marker = [];
   };
 
-  this.getPlayer = function() {
+  this.getPlayer = function () {
     return player;
   };
 
-  this.getBlackM = function() {
+  this.getBlackM = function () {
     return blackm;
   };
 
   var alertCallBack = angular.noop;
 
-  this.onAlert = function(callback) {
+  this.onAlert = function (callback) {
     alertCallBack = callback;
   };
 
   var GameOverCallBack = angular.noop;
 
-  this.onGameOver = function(callback) {
+  this.onGameOver = function (callback) {
     GameOverCallBack = callback;
   };
 
-  this.buy = function(a) { //buy from BlackM
+  this.buy = function (a) { //buy from BlackM
     if (player.cash >= blackm.onsale[a].price) {
       player.cash -= blackm.onsale[a].price;
       for (var i = 0; i < player.inventory.length; i++) {
@@ -204,13 +204,13 @@ app.service('GameManager', function($interval, GameMapService) {
     }
   };
 
-  this.sell = function() {
+  this.sell = function () {
     player.cash += (
-      blackm.sellprice.ecData * player.ecData +
-      blackm.sellprice.dataA * player.dataA +
-      blackm.sellprice.dataB * player.dataB +
-      blackm.sellprice.dataC * player.dataC
-    );
+        blackm.sellprice.ecData * player.ecData +
+        blackm.sellprice.dataA * player.dataA +
+        blackm.sellprice.dataB * player.dataB +
+        blackm.sellprice.dataC * player.dataC
+        );
     player.ecData = 0;
     player.ecDataTemp = 0;
     player.dataA = 0;
@@ -218,7 +218,7 @@ app.service('GameManager', function($interval, GameMapService) {
     player.dataC = 0;
   };
 
-  this.infect = function(a, b, c) {
+  this.infect = function (a, b, c) {
     a.countdown = Math.round(Math.random() + 1);
     a.duration = player.inventory[b].expiryTime + Math.floor((Math.random() * 30) + 1);
     a.timer = 0;
@@ -235,11 +235,11 @@ app.service('GameManager', function($interval, GameMapService) {
 
     player.marker.push(a);
     player.cash -= player.inventory[b].installationCost;
-    player.attentionLevel += player.inventory[b].risk * 40;
+    player.attentionLevel += player.inventory[b].risk * 20;
     player.points += c * 100;
   };
 
-  this.analysis = function() {
+  this.analysis = function () {
     player.dataA += Math.round(0.6 * player.ecData);
     player.dataB += Math.round(0.3 * player.ecData);
     player.dataC += Math.round(0.1 * player.ecData);
@@ -247,53 +247,51 @@ app.service('GameManager', function($interval, GameMapService) {
     player.ecDataTemp = 0;
   };
 
-  /*
+
   var gameover = function () {
     this.initGame();
     GameOverCallBack();
   };
-  */
 
-  this.update = function() {
-    /*if (player.attentionLevel >= 100) {
+  this.update = function () {
+    if (player.attentionLevel >= 1000) {
       player.gameover = true;
       this.initGame();
       GameOverCallBack();
-    } else {*/
-    for (var i = 0; i < player.marker.length; i++) {
-      player.marker[i].duration -= 1;
-      if (player.marker[i].countdown >= 0) {
-        player.marker[i].countdown -= 1;
-        player.marker[i].timer = player.marker[i].duration;
-      } else if (player.marker[i].countdown === -1) {
+    } else {
+      for (var i = 0; i < player.marker.length; i++) {
+        player.marker[i].duration -= 1;
+        if (player.marker[i].countdown >= 0) {
+          player.marker[i].countdown -= 1;
+          player.marker[i].timer = player.marker[i].duration;
+        } else if (player.marker[i].countdown === -1) {
 
-        player.marker[i].timer -= 1;
-        if (player.marker[i].producing === true) {
-          GameMapService.animateMarkerBounce(player.marker[i]);
-          player.ecDataTemp += player.marker[i].gps;
-          player.ecData = Math.floor(player.ecDataTemp);
-        } else if (player.marker[i].public === true && player.marker[i].producing === false && player.marker[i].lastbreath === false) {
-          player.marker[i].producing = true;
+          player.marker[i].timer -= 1;
+          if (player.marker[i].producing === true) {
+            GameMapService.animateMarkerBounce(player.marker[i]);
+            player.ecDataTemp += player.marker[i].gps;
+            player.ecData = Math.floor(player.ecDataTemp);
+          } else if (player.marker[i].public === true && player.marker[i].producing === false && player.marker[i].lastbreath === false) {
+            player.marker[i].producing = true;
 
+          }
+        }
+        if (player.marker[i].duration === 5) {
+          GameMapService.brokenKeyLogger(player.marker[i]);
+        } else if (player.marker[i].duration === 1 && player.marker[i].lastbreath === false) {
+          GameMapService.animateMarkerStop(player.marker[i]);
+          player.marker[i].producing = 0;
+          player.marker[i].lastbreath = false;
+        }
+        if (player.marker[i].duration < 0) {
+          player.marker[i].setMap(null);
+          player.marker.splice(i, 1);
         }
       }
-      if (player.marker[i].duration === 5) {
-        GameMapService.brokenKeyLogger(player.marker[i]);
-      } else if (player.marker[i].duration === 1 && player.marker[i].lastbreath === false) {
-        GameMapService.animateMarkerStop(player.marker[i]);
-        player.marker[i].producing = 0;
-        player.marker[i].lastbreath = false;
-      }
-      if (player.marker[i].duration < 0) {
-        player.marker[i].setMap(null);
-        player.marker.splice(i, 1);
-      }
+      //}
+
     }
-    //}
-
-  };
-
-
-
-  $interval(this.update, 1000);
+    ;
+    $interval(this.update, 1000);
+  }
 });
