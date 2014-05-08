@@ -56,7 +56,7 @@ app.service('GameManager', function($interval, GameMapService) {
       risk: 0.1,
       hitfactor: 0.75,
       expiryTime: 6,
-      installationCost: 12
+      installationCost: 20
     },
 
     {
@@ -67,7 +67,7 @@ app.service('GameManager', function($interval, GameMapService) {
       risk: 0.4,
       hitfactor: 1.2,
       expiryTime: 18,
-      installationCost: 16
+      installationCost: 30
     },
 
     {
@@ -78,7 +78,7 @@ app.service('GameManager', function($interval, GameMapService) {
       risk: 0.4,
       hitfactor: 1.4,
       expiryTime: 18,
-      installationCost: 19
+      installationCost: 40
     },
 
     {
@@ -89,7 +89,7 @@ app.service('GameManager', function($interval, GameMapService) {
       risk: 0.6,
       hitfactor: 2.2,
       expiryTime: 30,
-      installationCost: 25
+      installationCost: 50
     }
 
     // ------------ Analyzers -------------
@@ -183,12 +183,6 @@ app.service('GameManager', function($interval, GameMapService) {
     alertCallBack = callback;
   };
 
-  var gameOverCallBack = angular.noop;
-
-  this.onGameOver = function (callback) {
-    gameOverCallBack = callback;
-  };
-
   this.buy = function (a) { //buy from BlackM
     if (player.cash >= blackm.onsale[a].price) {
       player.cash -= blackm.onsale[a].price;
@@ -250,46 +244,33 @@ app.service('GameManager', function($interval, GameMapService) {
     player.ecDataTemp = 0;
   };
 
-
-  var gameover = function () {
-    this.initGame();
-    gameOverCallBack();
-  };
-
   this.update = function () {
-    if (player.attentionLevel >= 1000) {
-      player.gameover = true;
-      this.initGame();
-      gameOverCallBack();
-    } else {
-      for (var i = 0; i < player.marker.length; i++) {
-        player.marker[i].duration -= 1;
-        if (player.marker[i].countdown >= 0) {
-          player.marker[i].countdown -= 1;
-          player.marker[i].timer = player.marker[i].duration;
-        } else if (player.marker[i].countdown === -1) {
+    for (var i = 0; i < player.marker.length; i++) {
+      player.marker[i].duration -= 1;
+      if (player.marker[i].countdown >= 0) {
+        player.marker[i].countdown -= 1;
+        player.marker[i].timer = player.marker[i].duration;
+      } else if (player.marker[i].countdown === -1) {
+        player.marker[i].timer -= 1;
+        if (player.marker[i].producing === true) {
+          GameMapService.animateMarkerBounce(player.marker[i]);
+          player.ecDataTemp += player.marker[i].gps;
+          player.ecData = Math.floor(player.ecDataTemp);
+        } else if (player.marker[i].public === true && player.marker[i].producing === false && player.marker[i].lastbreath === false) {
+          player.marker[i].producing = true;
 
-          player.marker[i].timer -= 1;
-          if (player.marker[i].producing === true) {
-            GameMapService.animateMarkerBounce(player.marker[i]);
-            player.ecDataTemp += player.marker[i].gps;
-            player.ecData = Math.floor(player.ecDataTemp);
-          } else if (player.marker[i].public === true && player.marker[i].producing === false && player.marker[i].lastbreath === false) {
-            player.marker[i].producing = true;
-
-          }
         }
-        if (player.marker[i].duration === 5) {
-          GameMapService.brokenKeyLogger(player.marker[i]);
-        } else if (player.marker[i].duration === 1 && player.marker[i].lastbreath === false) {
-          GameMapService.animateMarkerStop(player.marker[i]);
-          player.marker[i].producing = 0;
-          player.marker[i].lastbreath = false;
-        }
-        if (player.marker[i].duration < 0) {
-          player.marker[i].setMap(null);
-          player.marker.splice(i, 1);
-        }
+      }
+      if (player.marker[i].duration === 5) {
+        GameMapService.brokenKeyLogger(player.marker[i]);
+      } else if (player.marker[i].duration === 1 && player.marker[i].lastbreath === false) {
+        GameMapService.animateMarkerStop(player.marker[i]);
+        player.marker[i].producing = 0;
+        player.marker[i].lastbreath = false;
+      }
+      if (player.marker[i].duration < 0) {
+        player.marker[i].setMap(null);
+        player.marker.splice(i, 1);
       }
     }
     $interval(this.update, 1000);

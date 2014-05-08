@@ -74,7 +74,7 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
     maps.event.addListener(map, 'click', callback);
   };
 
-  var putKeylogger = function(location, klname, callback, markerCallback) {
+  var putKeylogger = function(location, callback, markerCallback) {
     markerCallback = markerCallback || angular.noop;
 
     var image = {
@@ -89,7 +89,7 @@ app.factory('GameMapService', function(PlacesApi, MapsApi, $, maps) {
     };
 
     var marker = new google.maps.Marker({
-      title: klname,
+      //title: klname,
       position: location,
       map: map,
       icon: image
