@@ -114,22 +114,19 @@ body {
 }
 
 .navbar.main-nav {
-  background-color: black;
   font-family: 'PT Mono';
   .navbar-brand {
     color: #00ff00;
   }
   .navbar-text {
-    margin-top: 16px;
+    //margin-top: 16px;
     color: #00ff00;
   }
   .navbar-nav >li > a {
-    background-color: black;
     color: #00ff00;
   }
   .navbar-nav >li > a:hover {
     text-decoration: underline;
-    background-color: black;
     color: #00ff00;
   }
 }

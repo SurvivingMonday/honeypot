@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 app.controller('GameCtrl', function($scope, $timeout, GameManager, GameMapService) {
 
   GameMapService.init();
@@ -44,14 +42,13 @@ app.controller('GameCtrl', function($scope, $timeout, GameManager, GameMapServic
     } else {
       var temp = selectedIdx;
       if (Math.random() < 0.7 && temp !== null) {
-        GameMapService.putKeylogger(event.latLng, function(length, marker) {
-          if ($scope.player.cash >= $scope.player.inventory[b].installationCost) {
+        GameMapService.putKeylogger(event.latLng, $scope.player.inventory[temp].name, function(length, marker) {
+          if ($scope.player.cash >= $scope.player.inventory[temp].installationCost) {
             GameManager.infect(marker, temp, length);
             $scope.player = GameManager.getPlayer();
           } else {
             errorNotify('You do not have enough money!');
           }
-
         });
       } else {
         errorNotify('Keylogger deployment failed!!');
