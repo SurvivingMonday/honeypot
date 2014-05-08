@@ -14,7 +14,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-      <p class="navbar-text">Cash: ${{player.cash}}</p>
+      <p class="navbar-text">${{player.cash}}</p>
       <p class="navbar-text">Raw data: {{player.ecData}}</p>
       <p class="navbar-text">Credentials: {{player.dataA}}</p>
       <p class="navbar-text">Credit Cards: {{player.dataB}}</p>
@@ -22,7 +22,7 @@
       <p class="navbar-text">ATT: {{player.attentionLevel}}</p>
       </ul>
 
-      <ul class="right">
+      <ul class="nav navbar-nav navbar-right">
         <li><a href="/#/main">Logout ()</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
